@@ -1,0 +1,72 @@
+﻿@model DIYComputer.Entity.ComputerWareEntity.SSD
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_IMLayout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<h4>SSD</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SSDInterface" class="control-label"></label>
+                <input asp-for="SSDInterface" class="form-control" />
+                <span asp-validation-for="SSDInterface" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SSDCapacity" class="control-label"></label>
+                <input asp-for="SSDCapacity" class="form-control" />
+                <span asp-validation-for="SSDCapacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OutSpeed" class="control-label"></label>
+                <input asp-for="OutSpeed" class="form-control" />
+                <span asp-validation-for="OutSpeed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="InputSpeed" class="control-label"></label>
+                <input asp-for="InputSpeed" class="form-control" />
+                <span asp-validation-for="InputSpeed" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <input asp-for="Brand" class="form-control" />
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Value" class="control-label"></label>
+                <input asp-for="Value" class="form-control" />
+                <span asp-validation-for="Value" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HardWareEnum" class="control-label"></label>
+                <select asp-for="HardWareEnum" class="form-control"></select>
+                <span asp-validation-for="HardWareEnum" class="text-danger"></span>
+            </div>
+            @await Component.InvokeAsync("FileUp")
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

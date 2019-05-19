@@ -1,0 +1,188 @@
+﻿@model DIYComputer.Entity.ComputerWareEntity.Mainboard
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_IMLayout.cshtml";
+    //SelectList chips = ViewBag.EnumMBAMDChip;
+
+}
+<h2>Create</h2>
+
+<h4>Mainboard</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MBChipClass" class="control-label"></label>
+                <select onchange="getajax(this);" asp-for="MBChipClass" class="form-control" asp-items="ViewBag.EnumMBChipClass"></select>
+                <span asp-validation-for="MBChipClass" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MBAMDChip" class="control-label"></label>
+                <select asp-for="MBAMDChip" class="form-control" asp-items="ViewBag.EnumMBChips"></select>
+                <span asp-validation-for="MBAMDChip" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MBCPUType" class="control-label"></label>
+                <select asp-for="MBCPUType" class="form-control" asp-items="ViewBag.EnumMBCPUType"></select>
+                <span asp-validation-for="MBCPUType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MBIntegration" class="control-label"></label>
+                <select asp-for="MBIntegrations" multiple="multiple" class=" chosen-select-no-results form-control" asp-items="ViewBag.EnumMBIntegration">
+                    <option value=""></option>
+                </select>
+
+                @*    @Html.ListBoxFor(m => m.MBIntegrations, (IEnumerable<SelectListItem>)ViewBag.EnumMBIntegration, new { @class = "chosen-select-no-results form-control", multiple = "multiple" })*@
+
+                @*<select asp-for="MBIntegration" multiple="multiple" class="chosen-select-no-results form-control">
+
+                <option value=""></option>
+                @{
+                    foreach (var item in (SelectList
+                        )ViewBag.EnumMBIntegration)
+                    {
+
+                        <option value="@item.Text">@item.Text</option>
+                    }
+                }
+            </select>*@
+
+                <span asp-validation-for="MBIntegration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MBDisplayOut" class="control-label"></label>
+                <select asp-for="MBDisplayOuts" multiple="multiple" class=" chosen-select-no-results form-control " asp-items="ViewBag.EnumMBDisplayOut">
+                    <option value=""></option>
+                </select>
+
+                <span asp-validation-for="MBDisplayOut" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MBDPCIE" class="control-label"></label>
+                <select asp-for="MBDPCIE" class="form-control" asp-items="ViewBag.EnumMBDPCIE"></select>
+
+                <span asp-validation-for="MBDPCIE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MBDPICCount" class="control-label"></label>
+                <select asp-for="MBDPICCount" class="form-control" asp-items="ViewBag.EnumMBDPICCount"></select>
+
+                <span asp-validation-for="MBDPICCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MBSuitable" class="control-label"></label>
+                <select asp-for="MBSuitable" class="form-control" asp-items="ViewBag.EnumMBSuitable"></select>
+
+                <span asp-validation-for="MBSuitable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MBType" class="control-label"></label>
+                <select asp-for="MBType" class="form-control" asp-items="ViewBag.EnumMBType"></select>
+
+                <span asp-validation-for="MBType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MBCase" class="control-label"></label>
+                <select asp-for="MBCase" class="form-control" asp-items="ViewBag.EnumMBCase"></select>
+
+                <span asp-validation-for="MBCase" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <select asp-for="Brand" class="form-control" asp-items="ViewBag.EnumMBBrand"></select>
+
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Value" class="control-label"></label>
+                <input asp-for="Value" class="form-control" />
+                <span asp-validation-for="Value" class="text-danger"></span>
+            </div>
+            @await Component.InvokeAsync("FileUp")
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script>
+    function getajax(invalue) {
+        $("#MBAMDChip").empty();
+        $.ajax({
+            type: "GET",
+            url: "/api/enuminfo/Getenuminfo?name=" + invalue.value, //此次url改为真正需要的url
+            beforeSend: function (xhr) {
+
+                xhr.setRequestHeader("XSRF-TOKEN",
+
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+
+            },
+            success: function (data, status) {
+                $.each(data, function (index, item) {
+                    $("#MBAMDChip").append( //此处向select中循环绑定数据
+                        "<option value=" + item + ">" + item + "</option>");
+                });
+            },
+            //success: function success(resulet) {
+
+            //    var sel = document.getElementById("MBAMDChip");
+            //    $("#MBAMDChip").empty();
+            //    for (var i in resulet) {
+            //        sel.option.add = new Option(i, resulet[i]);
+            //    }
+
+            //}
+        });
+
+    }
+
+</script>
+<script src="~/chosen/docsupport/jquery-3.2.1.min.js"></script>
+<script src="~/chosen/chosen.jquery.min.js" type="text/javascript"></script>
+<script src="~/chosen/docsupport/prism.js"></script>
+<script src="~/chosen/docsupport/init.js"></script>
+<script src="~/chosen/docsupport/jquery-3.2.1.min.js"></script>
+<script src="~/chosen/chosen.jquery.min.js"></script>
+@*<script type="text/javascript">
+        $(document).ready(function () {
+            $('.chosen-select-no-results form-control').change(function () {
+                alert(chose_get_value('.chosen-select-no-results form-control'));
+                //console.log(chose_get_value('#cse'));
+                alert(chose_get_value('.chosen-select-no-results form-control') + ' : ' + chose_get_text('.chosen-select-no-results form-control'));
+            });
+
+        });
+        $(function () {
+            $('.chosen').chosen({
+                max_selected_options: 2
+            });
+
+            $(".chosen-deselect").chosen(
+                {
+                    allow_single_deselect: true
+                });
+
+            $(".chosen").chosen().change();
+            $(".chosen").trigger('chosen:updated');
+        });
+    </script>*@
+
+

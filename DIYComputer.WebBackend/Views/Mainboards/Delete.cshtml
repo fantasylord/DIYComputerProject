@@ -1,0 +1,106 @@
+﻿@model DIYComputer.Entity.ComputerWareEntity.Mainboard
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_IMLayout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Mainboard</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MBChipClass)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MBChipClass)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MBAMDChip)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MBAMDChip)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MBCPUType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MBCPUType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MBIntegration)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MBIntegration)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MBDisplayOut)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MBDisplayOut)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MBDPCIE)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MBDPCIE)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MBDPICCount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MBDPICCount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MBSuitable)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MBSuitable)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MBType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MBType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MBCase)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MBCase)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Brand)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Brand)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Value)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Value)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HardWareEnum)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HardWareEnum)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ID" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

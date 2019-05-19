@@ -1,0 +1,75 @@
+﻿@model DIYComputer.Entity.ComputerWareEntity.HardDisk
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_IMLayout.cshtml";
+}
+
+<h2>Create</h2>
+
+<h4>HardDisk</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="HDSuitable" class="control-label"></label>
+                <input asp-for="HDSuitable" class="form-control" />
+                <span asp-validation-for="HDSuitable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HDInterface" class="control-label"></label>
+                <input asp-for="HDInterface" class="form-control" />
+                <span asp-validation-for="HDInterface" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HDRotateSpeed" class="control-label"></label>
+                <input asp-for="HDRotateSpeed" class="form-control" />
+                <span asp-validation-for="HDRotateSpeed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HDCache" class="control-label"></label>
+                <input asp-for="HDCache" class="form-control" />
+                <span asp-validation-for="HDCache" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HDCapacity" class="control-label"></label>
+                <input asp-for="HDCapacity" class="form-control" />
+                <span asp-validation-for="HDCapacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <input asp-for="Brand" class="form-control" />
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Value" class="control-label"></label>
+                <input asp-for="Value" class="form-control" />
+                <span asp-validation-for="Value" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Imgurl" class="control-label"></label>
+                <input asp-for="Imgurl" class="form-control" />
+                <span asp-validation-for="Imgurl" class="text-danger"></span>
+            </div>
+            @await Component.InvokeAsync("FileUp")
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

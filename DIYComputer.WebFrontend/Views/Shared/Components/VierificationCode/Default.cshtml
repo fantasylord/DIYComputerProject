@@ -1,0 +1,60 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model DIYComputer.DtoModel.SysDto.VCode
+
+@{
+}
+
+<table>
+    <tr style="width :98%">
+        <td class="form-group">
+            <input id="Codeid" name="Codeid" value="@Model.Id" readonly hidden />
+            <input asp-for="Code" autocomplete="off" class="form-control " />
+        </td>
+        <td>
+         
+            @{
+                @if (Model.Data.Length > 0)
+                {<input type="image" value="验证码" onclick="return GetCode();" id="imgcode" title="点击刷新" src="data:image/png;base64,@System.Convert.ToBase64String(@Model.Data.ToArray()) " style="width: 100px;" />
+                }
+            }
+        </td>
+    </tr>
+
+</table>
+<script>
+    function GetCode() {
+
+
+        $.ajax({
+         
+            url: `/API/Base/GetVCode`, //此次url改为真正需要的url
+            type: 'GET', //　<!--type ：请求类型:post/get --> ,
+            dataType: 'json', //   <!--dataType:服务器返回的数据类型 text/xml/script/html/json/jsonp -->
+            // xhrFields: {
+            //     withCredentials: true
+            // },
+            async: true,
+            // crossDomain: true,
+            contentType: "application/json",
+            success: function (data, status) {
+
+                console.log("OK" + data);
+                debugger;
+                $("#Codeid").val(data.data.id);
+                $("#imgcode").attr("src", `data:image/png;base64,${data.data.imgstr}`);
+            },
+            error: function (data, status) {
+                debugger;
+                alert("bad");
+
+            }
+
+        });
+
+
+        return false;
+
+    }
+</script>

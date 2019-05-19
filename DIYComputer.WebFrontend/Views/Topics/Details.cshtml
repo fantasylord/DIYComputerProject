@@ -1,0 +1,57 @@
+﻿@model DIYComputer.Entity.SysEntity.Topic
+@{
+    ViewData["Title"] = "Details"; Layout = "_MyUserLayout";
+}
+<h2>Details</h2>
+<div>
+    <h4>Topic</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContentURL)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContentURL)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EditTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EditTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IP)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IP)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Outline)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Outline)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

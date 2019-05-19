@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <UserSecretsId>5dc1b204-9cb1-4ac1-97be-4f6b77cc9396</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="MiddleWare\AuthHelper\**" />
+    <Content Remove="MiddleWare\AuthHelper\**" />
+    <EmbeddedResource Remove="MiddleWare\AuthHelper\**" />
+    <None Remove="MiddleWare\AuthHelper\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.0.2105168" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.16" />
+    <PackageReference Include="UEditorForNetCore2" Version="1.0.0" />
+    <PackageReference Include="ZKWeb.System.Drawing" Version="4.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DIYComputer.Config\DIYComputer.Config.csproj" />
+    <ProjectReference Include="..\DIYComputer.DtoModel\DIYComputer.DtoModel.csproj" />
+    <ProjectReference Include="..\DIYComputer.Entity\DIYComputer.Entity.csproj" />
+    <ProjectReference Include="..\DIYComputer.Repository\DIYComputer.Repository.csproj" />
+    <ProjectReference Include="..\DIYComputer.Service\DIYComputer.Service.csproj" />
+    <ProjectReference Include="..\DIYComputer.Util\DIYComputer.Util.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\" />
+  </ItemGroup>
+
+</Project>

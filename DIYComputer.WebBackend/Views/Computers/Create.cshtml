@@ -1,0 +1,2033 @@
+﻿@model DIYComputer.Entity.SysEntity.Computer
+
+@{
+    ViewData["Title"] = "Create";
+
+}
+
+<link href="~/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<link href="~/node_modules/element-ui/lib/theme-chalk/index.css" rel="stylesheet" />
+<script src="~/node_modules/vue/dist/vue.js"></script>
+<script src="~/node_modules/element-ui/lib/index.js"></script>
+
+<div class="container-fluid  ">
+    <div class="row">
+
+
+        <div id="cplanlist" class="row col-md-6">
+
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <table class="container-fluid table">
+                    <thead class="row">
+                        <tr class="container ">
+                            <h3 class="text-center">装机配置清单</h3>
+                        </tr>
+                    </thead>
+                    <tr class="row">
+                        <th class="col-md-2 text-center">
+                            配件
+                        </th>
+                        <th class="col-md-2 text-center">
+                            品牌
+                        </th>
+                        <th class="col-md-2 text-center">
+                            名称
+                        </th>
+                        <th class="col-md-3 text-center">
+                            参考价格
+                        </th>
+                        <th class="col-md-2 text-center">
+                            操作
+                        </th>
+                    </tr>
+                    <tr class="row">
+
+                        <td class="col-md-2">
+                            <input name='CPUId' id='CPUId' v-model:value="datamodel.cpu.valuemodel.id" readonly
+                                   hidden />
+                            <button type="button" v-on:click="chosendata(datamodel.cpu)"
+                                    class="btn btn-primary   btn-sm">
+                                CPU
+                            </button>
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="CPUName" v-model:value="datamodel.cpu.valuemodel.name"
+                                   name="CPUName" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="CPUBrand" v-model:value="datamodel.cpu.valuemodel.brand"
+                                   name="CPUBrand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input type="number" class=" text-center  btn-sm  "
+                                   style="border: none;background: none" readonly="readonly" id="CPUValue"
+                                   v-model:value="datamodel.cpu.valuemodel.value" name="CPUValue" />
+
+                        </td>
+                        <td class="col-md-2">
+                            <button class=" btn btn-danger   btn-sm  "
+                                    type="button" v-on:click="cancel(datamodel.cpu.valuemodel)" readonly="readonly">
+                                清空
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="row">
+
+                        <td class="col-md-2">
+                            <input name='GraphyicId' id='GraphyicId' v-model:value="datamodel.graphyic.valuemodel.id" readonly
+                                   hidden />
+                            <button type="button" v-on:click="chosendata(datamodel.graphyic)"
+                                    class="btn btn-primary cont btn-sm">
+                                显卡
+                            </button>
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="graphyicName" v-model:value="datamodel.graphyic.valuemodel.name"
+                                   name="graphyicName" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="graphyicBrand"
+                                   v-model:value="datamodel.graphyic.valuemodel.brand" name="graphyicBrand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input type="number" class=" text-center  btn-sm  "
+                                   style="border: none;background: none" readonly="readonly" id="graphyicValue"
+                                   v-model:value="datamodel.graphyic.valuemodel.value" name="graphyicValue" />
+
+                        </td>
+                        <td class="col-md-2">
+                            <button class=" btn btn-danger   btn-sm  "
+                                    type="button" v-on:click="cancel(datamodel.graphyic.valuemodel)" readonly="readonly">
+                                清空
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="row">
+
+                        <td class="col-md-2">
+                            <input name='MainboardId' id='MainboardId' v-model:value="datamodel.mainboard.valuemodel.id"
+                                   readonly hidden />
+                            <button type="button" v-on:click="chosendata(datamodel.mainboard)"
+                                    class="btn btn-primary cont btn-sm">
+                                主板
+                            </button>
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="mainboardName"
+                                   v-model:value="datamodel.mainboard.valuemodel.name" name="mainboardName" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="mainboardBrand"
+                                   v-model:value="datamodel.mainboard.valuemodel.brand" name="mainboardBrand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input type="number" class=" text-center  btn-sm  "
+                                   style="border: none;background: none" readonly="readonly"
+                                   id="mainboardValue" v-model:value="datamodel.mainboard.valuemodel.value"
+                                   name="mainboardValue" />
+
+                        </td>
+                        <td class="col-md-2">
+                            <button class=" btn btn-danger   btn-sm  "
+                                    type="button" v-on:click="cancel(datamodel.mainboard.valuemodel)" readonly="readonly">
+                                清空
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr class="row">
+
+                        <td class="col-md-2">
+                            <input name='ROMId' id='ROMId' v-model:value="datamodel.rom.valuemodel.id" readonly
+                                   hidden />
+                            <button type="button" v-on:click="chosendata(datamodel.rom)"
+                                    class="btn btn-primary cont btn-sm">
+                                内存
+                            </button>
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="romName" v-model:value="datamodel.rom.valuemodel.name"
+                                   name="romName" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="romBrand" v-model:value="datamodel.rom.valuemodel.brand"
+                                   name="romBrand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input type="number" class=" text-center  btn-sm  "
+                                   style="border: none;background: none" readonly="readonly" id="romValue"
+                                   v-model:value="datamodel.rom.valuemodel.value" name="romValue" />
+
+                        </td>
+                        <td class="col-md-2">
+                            <button class=" btn btn-danger   btn-sm  "
+                                    type="button" v-on:click="cancel(datamodel.rom.valuemodel)" readonly="readonly">
+                                清空
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="row">
+
+                        <td class="col-md-2">
+                            <input name='HardDiskId' id='HardDiskId' v-model:value="datamodel.harddisk.valuemodel.id"
+                                   readonly hidden />
+                            <button type="button" v-on:click="chosendata(datamodel.harddisk)"
+                                    class="btn btn-primary cont btn-sm">
+                                硬盘
+                            </button>
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="harddiskName" v-model:value="datamodel.harddisk.valuemodel.name"
+                                   name="harddiskName" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="harddiskBrand"
+                                   v-model:value="datamodel.harddisk.valuemodel.brand" name="harddiskBrand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input type="number" class=" text-center  btn-sm  "
+                                   style="border: none;background: none" readonly="readonly" id="harddiskValue"
+                                   v-model:value="datamodel.harddisk.valuemodel.value" name="harddiskValue" />
+
+                        </td>
+                        <td class="col-md-2">
+                            <button class=" btn btn-danger   btn-sm  "
+                                    type="button" v-on:click="cancel(datamodel.harddisk.valuemodel)" readonly="readonly">
+                                清空
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="row">
+
+                        <td class="col-md-2">
+                            <input name='SSDId' id='SSDId' v-model:value="datamodel.ssd.valuemodel.id" readonly
+                                   hidden />
+                            <button type="button" v-on:click="chosendata(datamodel.ssd)"
+                                    class="btn btn-primary cont btn-sm">
+                                固态硬盘
+                            </button>
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="ssdName" v-model:value="datamodel.ssd.valuemodel.name"
+                                   name="ssdName" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="ssdBrand" v-model:value="datamodel.ssd.valuemodel.brand"
+                                   name="ssdBrand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input type="number" class=" text-center  btn-sm  "
+                                   style="border: none;background: none" readonly="readonly" id="ssdValue"
+                                   v-model:value="datamodel.ssd.valuemodel.value" name="ssdValue" />
+
+                        </td>
+                        <td class="col-md-2">
+                            <button class=" btn btn-danger   btn-sm  "
+                                    type="button" v-on:click="cancel(datamodel.ssd.valuemodel)" readonly="readonly">
+                                清空
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="row">
+
+                        <td class="col-md-2">
+                            <input name='CDROMId' id='CDROMId' v-model:value="datamodel.cdrom.valuemodel.id" readonly
+                                   hidden />
+                            <button type="button" v-on:click="chosendata(datamodel.cdrom)"
+                                    class="btn btn-primary cont btn-sm">
+                                光驱
+                            </button>
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="cdromName" v-model:value="datamodel.cdrom.valuemodel.name"
+                                   name="cdromName" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="cdromBrand" v-model:value="datamodel.cdrom.valuemodel.brand"
+                                   name="cdromBrand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input type="number" class=" text-center  btn-sm  "
+                                   style="border: none;background: none" readonly="readonly" id="cdromValue"
+                                   v-model:value="datamodel.cdrom.valuemodel.value" name="cdromValue" />
+
+                        </td>
+                        <td class="col-md-2">
+                            <button class=" btn btn-danger   btn-sm  "
+                                    type="button" v-on:click="cancel(datamodel.cdrom.valuemodel)" readonly="readonly">
+                                清空
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr class="row">
+
+                        <td class="col-md-2">
+                            <input name='DisplayId' id='DisplayId' v-model:value="datamodel.display.valuemodel.id"
+                                   readonly hidden />
+                            <button type="button" v-on:click="chosendata(datamodel.display)"
+                                    class="btn btn-primary cont btn-sm">
+                                显示器
+                            </button>
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="displayName" v-model:value="datamodel.display.valuemodel.name"
+                                   name="displayName" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="displayBrand" v-model:value="datamodel.display.valuemodel.brand"
+                                   name="displayBrand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input type="number" class=" text-center  btn-sm  "
+                                   style="border: none;background: none" readonly="readonly" id="displayValue"
+                                   v-model:value="datamodel.display.valuemodel.value" name="displayValue" />
+
+                        </td>
+                        <td class="col-md-2">
+                            <button class=" btn btn-danger   btn-sm  "
+                                    type="button" v-on:click="cancel(datamodel.display.valuemodel)" readonly="readonly">
+                                清空
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="row">
+
+                        <td class="col-md-2">
+                            <input name='CaseId' id='CaseId' v-model:value="datamodel.case.valuemodel.id" readonly
+                                   hidden />
+                            <button type="button" v-on:click="chosendata(datamodel.case)"
+                                    class="btn btn-primary cont btn-sm">
+                                机箱
+                            </button>
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="caseName" v-model:value="datamodel.case.valuemodel.name"
+                                   name="caseName" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="caseBrand" v-model:value="datamodel.case.valuemodel.brand"
+                                   name="caseBrand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input type="number" class=" text-center  btn-sm  "
+                                   style="border: none;background: none" readonly="readonly" id="caseValue"
+                                   v-model:value="datamodel.case.valuemodel.value" name="caseValue" />
+
+                        </td>
+                        <td class="col-md-2">
+                            <button class=" btn btn-danger   btn-sm  "
+                                    type="button" v-on:click="cancel(datamodel.case.valuemodel)" readonly="readonly">
+                                清空
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="row">
+
+                        <td class="col-md-2">
+                            <input name='PowerId' id='PowerId' v-model:value="datamodel.power.valuemodel.id" readonly
+                                   hidden />
+                            <button type="button" v-on:click="chosendata(datamodel.power)"
+                                    class="btn btn-primary cont btn-sm">
+                                电源
+                            </button>
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="powerName" v-model:value="datamodel.power.valuemodel.name"
+                                   name="powerName" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="powerBrand" v-model:value="datamodel.power.valuemodel.brand"
+                                   name="powerBrand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input type="number" class=" text-center  btn-sm  "
+                                   style="border: none;background: none" readonly="readonly" id="powerValue"
+                                   v-model:value="datamodel.power.valuemodel.value" name="powerValue" />
+
+                        </td>
+                        <td class="col-md-2">
+                            <button class=" btn btn-danger   btn-sm  "
+                                    type="button" v-on:click="cancel(datamodel.power.valuemodel)" readonly="readonly">
+                                清空
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="row">
+
+                        <td class="col-md-2">
+                            <input name='CPUHSId' id='CPUHSId' v-model:value="datamodel.cpuhs.valuemodel.id" readonly
+                                   hidden />
+                            <button type="button" v-on:click="chosendata(datamodel.cpuhs)"
+                                    class="btn btn-primary cont btn-sm">
+                                cpu散热器
+                            </button>
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="cpuhsName" v-model:value="datamodel.cpuhs.valuemodel.name"
+                                   name="cpuhsName" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="cpuhsBrand" v-model:value="datamodel.cpuhs.valuemodel.brand"
+                                   name="cpuhsBrand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input type="number" class=" text-center  btn-sm  "
+                                   style="border: none;background: none" readonly="readonly" id="cpuhsValue"
+                                   v-model:value="datamodel.cpuhs.valuemodel.value" name="cpuhsValue" />
+
+                        </td>
+                        <td class="col-md-2">
+                            <button class=" btn btn-danger   btn-sm  "
+                                    type="button" v-on:click="cancel(datamodel.cpuhs.valuemodel)" readonly="readonly">
+                                清空
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="row">
+
+                        <td class="col-md-2">
+                            <input name='NetWorkId' id='NetWorkId' v-model:value="datamodel.network.valuemodel.id"
+                                   readonly hidden />
+                            <button type="button" v-on:click="chosendata(datamodel.network)"
+                                    class="btn btn-primary cont btn-sm">
+                                网卡
+                            </button>
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="networkName" v-model:value="datamodel.network.valuemodel.name"
+                                   name="networkName" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" type="text"
+                                   readonly="readonly" id="networkBrand" v-model:value="datamodel.network.valuemodel.brand"
+                                   name="networkBrand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input type="number" class=" text-center  btn-sm  "
+                                   style="border: none;background: none"  readonly="readonly" id="networkValue"
+                                   v-model:value="datamodel.network.valuemodel.value" name="networkValue" />
+
+                        </td>
+                        <td class="col-md-2">
+                            <button class=" btn btn-danger   btn-sm  "
+                                    type="button" v-on:click="cancel(datamodel.network.valuemodel)" readonly="readonly">
+                                清空
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td colspan="2">
+                            <label>合计</label>
+                        </td>
+                        <td colspan="2">
+                            <input type="number" class=" text-center  btn-sm  "
+                                   style="border: none;background: none" readonly="readonly" id="ValueSum"
+                                   v-model:value="valuesum" name="ValueSum" />
+
+                        </td>
+
+                    </tr>
+                    <tr class="row">
+                        <td class="col-md-12">
+
+                            <div class="form-group">
+                                <label asp-for="PlanName" class="col-md-2"></label>
+                                <input asp-for="PlanName" class="col-md-8 form-control" />
+                                <span asp-validation-for="PlanName" class="text-danger"></span>
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    <tr class="row">
+                        <td class="col-md-12">
+
+                            <div class="form-group">
+                                <label class=" col-md-2 control-label">备注相关</label>
+                                <input asp-for="Remarks" hidden />
+                                <el-select class="col-md-8 " v-model="remarks" multiple filterable="true" placeholder="请选择">
+                                    <el-option v-for="item in remarksoptions"
+                                               :value="item">
+                                    </el-option>
+                                </el-select>
+
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    <tr class="row">
+                        <td class="col-md-4 ml-auto">
+                            <button type="submit">提交保存</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <div id="selectlist" class="col-md-6 container-fluid offset-1" style="margin-left: -10px">
+            <div class="container">
+                <div class="row table border-bottom ">
+                    <div class="container ">
+                        <h3 class="text-center">{{menuname}}</h3>
+
+                    </div>
+                </div>
+                <div class="pre-scrollable container" style="height:200px">
+
+
+                    <div class="row " v-for="(item,k) in selectmenumodel">
+                        <div class="col-md-2 text-right p-0 m-0">{{item.listname}}</div>
+                        <div class="col-md-10 text-left">
+                            <div class="container">
+
+                                <el-radio-group class="row  ml-1" v-on:change="selectedChange(item,k)"
+                                                v-model="item.selected" size="mini">
+                                    <el-radio-button label="">
+                                        全部
+                                    </el-radio-button>
+                                    <el-radio-button v-for="(v,k) in getvalueoptions(item.dataurl)" :label="v">
+                                        {{v}}
+                                    </el-radio-button>
+                                </el-radio-group>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <hardlist-item v-for="(value,key) in selectmenumodel" class="border-bottom p-1"
+                        v-on:changevalue="value.selected = $event" :url="value.dataurl" :btnname="value.listname"
+                        v-model:selected="value.selected">
+                    </hardlist-item> -->
+
+
+
+                </div>
+
+                <div class="row pl-3">
+
+                    <span class="ml-1" v-for="(value,key) in selectmenumodel">
+                        {{value.selected}}
+                    </span>
+                </div>
+                <div class="container p-0">
+
+                    <grouplist-content ref="usernameInput" :url="url" :selectmenumodel="selectmenumodel"
+                                       :menuname='menuname' v-on:event-getdata="setmodelvalue">
+
+                    </grouplist-content>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+            var servicehost = "";
+
+
+        function getAjaxForEnumInfo(val) {
+            // var hostser = GetConfigForServiceAPI();
+            var result = "";
+
+
+            $.ajax({
+
+                url: val, //此次url改为真正需要的url
+                type: 'GET', //　<!--type ：请求类型:post/get --> ,
+                dataType: 'json', //   <!--dataType:服务器返回的数据类型 text/xml/script/html/json/jsonp -->
+                 xhrFields: {
+                     withCredentials: true
+                 },
+                async: false,
+                // crossDomain: true,
+                contentType: "application/json",
+                success: function (data, status) {
+
+                    // console.log(data);
+                    result = data;
+                },
+                error: function (data) {
+
+                }
+                //success: function success(resulet) {
+
+                //    var sel = document.getElementById("MBAMDChip");
+                //    $("#MBAMDChip").empty();
+                //    for (var i in resulet) {
+                //        sel.option.add = new Option(i, resulet[i]);
+                //    }
+
+                //}
+            });
+
+            return result;
+        }
+
+
+        //全局组件模型消息传递
+        const globalBus = new Vue({});
+
+        ///selectlist筛选列表
+        Vue.component('hardlist-item', {
+            data() {
+                return {
+                    cselected: "",
+                    options: "",
+
+                }
+            },
+
+            template: `
+                <div class="row ">
+                        <div class="col-md-2 text-right p-0 m-0">{{btnname}}</div>
+                        <div class="col-md-10 text-left">
+                            <div class="container">
+
+                            <el-radio-group class="row  ml-1"  v-model="cselected" v-on:change="$emit('changevalue',  cselected)"
+                                size="mini">
+                                <el-radio-button   label="">
+                                    全部
+                                </el-radio-button>
+                                <el-radio-button   v-for="(v,k) in  options" :label="v">
+                                    {{v}}
+                                </el-radio-button>
+                            </el-radio-group>
+
+                            </div>
+                        </div>
+                </div>
+             `,
+            updated() {
+                // this.$forceUpdate()
+                // console.log("hardlistt-selectlist筛选列表更新" + this.url);
+                //this.GetData(this.url);
+
+            },
+            created: function () {
+
+                this.GetData(this.url);
+            },
+            methods: {
+                GetData: function (val) {
+
+                    var result = "";
+                    $.ajax({
+
+                        url: val, //此次url改为真正需要的url
+                        type: 'GET', //　<!--type ：请求类型:post/get --> ,
+                        dataType: 'json', //   <!--dataType:服务器返回的数据类型 text/xml/script/html/json/jsonp -->
+                        // xhrFields: {
+                        //     withCredentials: true
+                        // },
+                        async: false,
+                        // crossDomain: true,
+                        contentType: "application/json",
+                        success: function (data, status) {
+                            // console.log(data);
+                            result = data;
+                        },
+                        error: function (data) {
+
+                        }
+                        //success: function success(resulet) {
+
+                        //    var sel = document.getElementById("MBAMDChip");
+                        //    $("#MBAMDChip").empty();
+                        //    for (var i in resulet) {
+                        //        sel.option.add = new Option(i, resulet[i]);
+                        //    }
+
+                        //}
+                    });
+                    this.options = result;
+                },
+            },
+            // computed: {
+
+            //        url:{
+            //            get:function(){
+            //                return this.url;
+            //            },
+            //            set:function(val){
+            //
+            //                this.url=val;
+            //                this.options=getAjaxForEnumInfo(this.url);
+            //            }
+            //        }
+
+            // },
+            props: ["btnname", 'selected', 'url'],
+
+        })
+        ///内容列表清单
+        Vue.component('grouplist-content', {
+
+            data() {
+                return {
+                    datas: {
+                        data: {
+                            items: [],
+                        },
+                    },
+                    selectmenumodel: {},
+                    pagesize: 5,
+                    pagesizes: [5, 20, 50, 100],
+                    counts: "",
+                    indexPage: 1,
+                    totalPage: 1,
+                    searchvalue: '名字',
+                    displaymodel: {},
+                    dialogFormVisible: false,
+                    searchforid: '',
+
+                }
+            },
+            created: function () {
+
+                this.GetData({
+                    indexPage: this.indexPage,
+                    pageSize: this.pagesize
+                })
+
+            },
+            // watch: {
+            //     apiaddress: function (val) {
+            //         this.GetData(val);
+            //     }
+            // },
+            updated: function () {
+
+
+
+                this.selectmenumodel;
+
+                console.log('内容列表信息更新' + this.url);
+
+            },
+            watch: {
+
+                menuname: function (val) {
+                    // console.log('menunamechanges');
+
+
+                },
+                url: function (val) {
+                    //this.detailCity
+                    // console.log('urlchanges');
+
+                    this.GetData({
+                        indexPage: this.indexPage,
+                        pageSize: this.pagesize
+                    });
+                },
+            },
+            methods: {
+                GetItems() {
+
+                    var items = this.datas.data.items;
+                    if (items != null)
+                        return items;
+                    else
+                        return [];
+                },
+                handleSizeChange(val) {
+
+                    this.GetData({
+                        indexPage: this.indexPage,
+                        pageSize: val
+                    });
+                    this.pagesize = val;
+                },
+                handleCurrentChange(val) {
+
+
+                    this.GetData({
+                        indexPage: val,
+                        pageSize: this.pagesize
+                    });
+                    this.indexPage = val;
+                },
+
+                ClientSearch() {
+
+                    var selectedmd = this.selectmenumodel;
+
+                    if ("处理器" == this.menuname) {
+
+                        this.datas.data.items = this.datas.data.items.filter(function (item) {
+
+
+                            return item.cpuCoreCount.indexOf(selectedmd.cpuCoreCount.selected) >= 0 &&
+                                item.brand.indexOf(selectedmd.brand.selected) >= 0 &&
+                                item.cpuClass.indexOf(selectedmd.cpuClass.selected) >= 0 &&
+                                item.cpuSuitable.indexOf(selectedmd.cpuSuitable.selected) >= 0 &&
+                                item.cpuTechnology.indexOf(selectedmd.cpuTechnology.selected) >= 0
+                        });
+                    } else if ("显卡" == this.menuname) {
+
+                        if (selectedmd.graphicTypeA.selected + selectedmd.graphicTypeC.selected + selectedmd
+                            .graphicTypeN.selected + '' == '') {
+
+                            this.datas.data.items = this.datas.data.items.filter(function (item) {
+                                return (item.graphicsCapacity.indexOf(selectedmd.graphicsCapacity
+                                        .selected) >= 0) &&
+                                    (item.graphicsBits.indexOf(selectedmd.graphicsBits.selected) >= 0)
+                            });
+                        } else {
+
+                            this.datas.data.items = this.datas.data.items.filter(function (item) {
+                                return (item.graphicType == '' + selectedmd.graphicTypeN.selected) ||
+                                    (item.graphicType == '' + selectedmd.graphicTypeA.selected) ||
+                                    (item.graphicType == '' + selectedmd.graphicTypeC.selected) &&
+                                    (item.graphicsCapacity.indexOf(selectedmd.graphicsCapacity.selected) >=
+                                        0) &&
+                                    (item.graphicsBits.indexOf(selectedmd.graphicsBits.selected) >= 0)
+                            });
+                        }
+
+                    } else if ("内存" == this.menuname) {
+
+                        this.datas.data.items = this.datas.data.items.filter(function (item) {
+
+
+                            return (item.brand.indexOf(selectedmd.brand.selected) >= 0) &&
+                                (item.romCapacity
+                                    .indexOf(selectedmd.romCapacity.selected) >= 0) &&
+                                (item.rommHz.indexOf(
+                                    selectedmd.rommHz.selected) >= 0) && (item.romddrType.indexOf(
+                                    selectedmd.romddrType.selected) >= 0)
+
+
+                        });
+
+                    } else if ("主板" == this.menuname) {
+
+                        this.datas.data.items = this.datas.data.items.filter(function (item) {
+
+
+                            return (item.brand.indexOf(selectedmd.brand.selected) >= 0) && (item.mbSuitable
+                                .indexOf(selectedmd.mbSuitable.selected) >= 0) && (item.mbDisplayOut
+                                .indexOf(selectedmd.mbDisplayOut.selected) >= 0) && (item.mbCase
+                                .indexOf(selectedmd.mbCase.selected) >= 0)
+
+                        });
+                    } else if ("硬盘" == this.menuname) {
+
+                        this.datas.data.items = this.datas.data.items.filter(function (item) {
+
+
+                            return (item.brand.indexOf(selectedmd.brand.selected) >= 0) && (item.hdInterface
+                                .indexOf(selectedmd.hdInterface.selected) >= 0) && (item.hdRotateSpeed
+                                .indexOf(selectedmd.hdRotateSpeed.selected) >= 0) && (item.hdCapacity
+                                .indexOf(selectedmd.hdCapacity.selected) >= 0) && (item.hdCache
+                                .indexOf(selectedmd.hdCache.selected) >= 0)
+
+                        });
+                    } else if ("固态硬盘" == this.menuname) {
+
+                        this.datas.data.items = this.datas.data.items.filter(function (item) {
+
+
+                            return (item.brand.indexOf(selectedmd.brand.selected) >= 0) &&
+                                (item.ssdInterface.indexOf(selectedmd.ssdInterface.selected) >= 0)
+
+                        });
+
+                    } else if ("光驱" == this.menuname) {
+
+                        this.datas.data.items = this.datas.data.items.filter(function (item) {
+
+
+                            return (item.cdromType.indexOf(selectedmd.cdromType.selected) >= 0)
+
+                        });
+
+                    } else if ("显示器" == this.menuname) {
+
+                        this.datas.data.items = this.datas.data.items.filter(function (item) {
+
+
+                            return (item.brand.indexOf(selectedmd.brand.selected) >= 0) &&
+                                (item.displaySize.indexOf(selectedmd.displaySize.selected) >= 0) &&
+                                (item.displayUseWay.indexOf(selectedmd.displayUseWay.selected) >= 0) &&
+                                (item.displayColor.indexOf(selectedmd.displayColor.selected) >= 0)
+                        });
+
+                    } else if ("机箱" == this.menuname) {
+
+                        this.datas.data.items = this.datas.data.items.filter(function (item) {
+
+
+                            return (item.brand.indexOf(selectedmd.brand.selected) >= 0) &&
+                                (item.caseCondition.indexOf(selectedmd.caseCondition.selected) >= 0) &&
+                                (item.caseFunction.indexOf(selectedmd.caseFunction.selected) >= 0) &&
+                                (item.caseStruct.indexOf(selectedmd.caseStruct.selected) >= 0)
+                        });
+
+                    } else if ("电源" == this.menuname) {
+
+                        this.datas.data.items = this.datas.data.items.filter(function (item) {
+
+
+                            return (item.brand.indexOf(selectedmd.brand.selected) >= 0) &&
+                                (item.powerRange.indexOf(selectedmd.powerRange.selected) >= 0)
+                        });
+
+                    } else if ("cpu散热" == this.menuname) {
+
+                        this.datas.data.items = this.datas.data.items.filter(function (item) {
+
+
+                            return (item.brand.indexOf(selectedmd.brand.selected) >= 0) &&
+                                (item.cpuhsType.indexOf(selectedmd.cpuhsType.selected) >= 0)
+                        });
+
+                    } else if ("网卡" == this.menuname) {
+
+                        this.datas.data.items = this.datas.data.items.filter(function (item) {
+
+
+                            return (item.brand.indexOf(selectedmd.brand.selected) >= 0) &&
+                                (item.netWokrSuitable.indexOf(selectedmd.netWokrSuitable.selected) >= 0)
+                        });
+
+                    }
+
+
+
+                    Vue.set(this, 'counts', this.datas.data.items.length);
+                    //this.counts=this.datas.data.items.length;
+                    //  this.datas.data.items=list;
+                    //   Vue.set(this.datas)
+                    //   this.counts=list.length;
+
+                    this.datas.data.items.sort();
+                },
+                GetData: function ({
+                    indexPage = 1,
+                    pageSize = 10
+                } = {}) {
+                    //const me = this;
+                    var result = "";
+                    var url = this.url;
+                    $.ajax({
+                        url: `${url}?indexPage=${indexPage}&Size=${pageSize}`, //  <!-- url  :请求地址 -->
+                        type: 'GET', //　<!--type ：请求类型:post/get --> ,
+                        dataType: 'json', //   <!--dataType:服务器返回的数据类型 text/xml/script/html/json/jsonp -->
+                        // xhrFields: {
+                        //     withCredentials: true
+                        // },
+                        async: false,
+                        // crossDomain: true,
+                        contentType: "application/json",
+                        success: function (data) { //　<!--回调函数 -->
+                            // // console.log(data); //      <! -- 浏览器控制台显示返回内容（建议使用） -->
+                            // console.log("result"); //      <! -- 浏览器控制台显示返回内容（建议使用） -->
+                            $.each(data.data.items, function (index, item) {
+                                var endstr = item.imgurl.indexOf(';');
+                                item.displayImg = `${servicehost}` + item
+                                    .displayImg;
+                                item.imgurl = `${servicehost}` + item
+                                    .imgurl.substring(0, endstr);
+
+                            });
+                            result = data;
+                        },
+                        error: function (data) {
+                            // console.log(data);
+                        },
+
+                    });
+
+
+                    Vue.set(this, 'datas', result);
+                    this.counts = this.datas.data.totalItems;
+
+                    // console.log(this.counts);
+
+                },
+                GetDataForId: function () {
+                    var result = "";
+                    var url = this.url;
+                    $.ajax({
+                        url: `${url}?id=${this.searchforid}`, //  <!-- url  :请求地址 -->
+                        type: 'GET', //　<!--type ：请求类型:post/get --> ,
+                        dataType: 'json', //   <!--dataType:服务器返回的数据类型 text/xml/script/html/json/jsonp -->
+                        // xhrFields: {
+                        //     withCredentials: true
+                        // },
+                        async: false,
+                        // crossDomain: true,
+                        contentType: "application/json",
+                        success: function (data) { //　<!--回调函数 -->
+                            // // console.log(data); //      <! -- 浏览器控制台显示返回内容（建议使用） -->
+                            // console.log("result"); //      <! -- 浏览器控制台显示返回内容（建议使用） -->
+                            $.each(data.data.items, function (index, item) {
+                                var endstr = item.imgurl.indexOf(';');
+                                item.displayImg = `${servicehost}` + item
+                                    .displayImg;
+                                item.imgurl = `${servicehost}` + item
+                                    .imgurl.substring(0, endstr);
+
+                            });
+                            result = data;
+                        },
+                        error: function (data) {
+                            // console.log(data);
+                        },
+                    });
+                    Vue.set(this, 'datas', result);
+                    this.counts = this.datas.data.totalItems;
+
+                },
+                push() {
+                    this.datas.data.items.push(this.addValue);
+
+                },
+                pop() {
+                    this.datas.data.items.pop();
+
+                },
+                shift() {
+                    this.datas.data.items.shift();
+
+                },
+                unshift() {
+                    this.datas.data.items.unshift(this.addValue);
+
+                },
+                splice() {
+                    this.datas.data.items.splice(0, 1);
+
+                },
+                sort() {
+
+                    this.GetData({
+                        indexPage: this.indexPage,
+                        pageSize: this.pagesize
+                    });
+                    this.datas.data.items.sort(this.sortBy('name'));
+
+
+
+                },
+                sortup() {
+
+
+                    this.datas.data.items.sort(this.sortBy('value'));
+
+
+                },
+                sortdown() {
+                    this.datas.data.items.sort(this.sortBy('value', false));
+
+
+                },
+                sortbrand() {
+                    this.datas.data.items.sort(this.sortBy('brand'));
+
+                },
+                sortname() {
+                    this.datas.data.items.sort(this.sortBy('name'));
+
+                },
+                sortadd() {
+                    this.datas.data.items.sort(this.sortBy('addCount', false));
+
+                },
+                sortclick() {
+                    this.datas.data.items.sort(this.sortBy('mounthCount', false));
+
+                },
+                reverse() {
+                    this.datas.data.items.reverse();
+
+                },
+                sortforid: function () {
+                    this.GetDataForId();
+                },
+                sortBy: function (attr, rev) {
+                    //第二个参数没有传递 默认升序排列
+                    if (rev == undefined) {
+                        rev = 1;
+                    } else {
+                        rev = (rev) ? 1 : -1;
+                    }
+                    return function (a, b) {
+                        a = a[attr];
+                        b = b[attr];
+                        if (a < b) {
+                            return rev * -1;
+                        }
+                        if (a > b) {
+                            return rev * 1;
+                        }
+                        return 0;
+                    }
+                },
+                Openwindow: function (val) {
+                    this.displaymodel = val;
+                    this.dialogFormVisible = true;
+                }
+            },
+
+            props: ['url', 'selectmenumodel', 'menuname'],
+            template: `<div class="container p-1">
+                                <div class="row m-1">
+
+                                    <el-button-group class="row  ml-1" v-model="searchvalue"
+                                        size="mini">
+                                        <el-button  v-on:click='ClientSearch' size='mini' icon="el-icon-tickets"  >
+                                         按条件筛选
+                                        </el-button>
+                                        <el-button  v-on:click='sortname'  size='mini' icon="el-icon-tickets"  >
+                                            名字
+                                        </el-button>
+                                        <el-button v-on:click='sortup'  size='mini'  icon="el-icon-sort-up"  >
+                                            价格
+                                        </el-button>
+                                        <el-button  v-on:click='sortdown' size='mini'  icon="el-icon-sort-down"   >
+                                            价格
+                                        </el-button>
+                                        <el-button  v-on:click='sortbrand' size='mini' icon="el-icon-tickets"  >
+                                            品牌
+                                        </el-button>
+                                        <el-button  v-on:click='sort' size='mini' icon="el-icon-refresh" >
+                                          重新加载
+                                        </el-button>
+
+                                    </el-button-group>
+                                    <div class="row m-1 col-md-6 p-0">
+                                        <el-input type="number"   size='mini' v-model="searchforid" placeholder="请输入查找编号" clearable>
+                                            <el-button slot="append" v-on:click='sortforid' icon="el-icon-search"></el-button>
+                                        </el-input>
+                                    </div>
+
+
+
+
+
+                                </div>
+                                <div class="row  container  pre-scrollable p-0 m-0" style="height:600px">
+                                    <el-dialog title="查看详情"
+                                                             :visible.sync="dialogFormVisible">
+                                                                    <el-form >
+
+                                                                <el-form-item   label="">
+                                                                    <img :src="displaymodel.displayImg" class="image"/>
+                                                                </el-form-item>
+                                                                <el-form-item  label="编号">
+                                                                 {{displaymodel.id}}
+                                                                </el-form-item>
+                                                                <el-form-item  label="品牌">
+                                                                 {{displaymodel.brand}}
+                                                                </el-form-item>
+                                                                <el-form-item   label="名字">
+                                                                 {{displaymodel.name}}
+                                                                </el-form-item>
+                                                                <template  v-if="(menuname=='处理器')">
+                                                                        <el-form-item    label="型号">
+                                                                    {{displaymodel.cpuClass}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="内核数目">
+                                                                    {{displaymodel.cpuCoreCount}}
+                                                                    </el-form-item>
+                                                                    <el-form-item  label="CPU类别">
+                                                                    {{displaymodel.cpuType}}
+                                                                    </el-form-item >
+                                                                    <el-form-item label="制作工艺">
+                                                                    {{displaymodel.cpuTechnology}}
+                                                                    </el-form-item >
+                                                                    <el-form-item  label="保修">
+                                                                        {{displaymodel.cpuIsCase}}
+                                                                    </el-form-item>
+                                                                </template >
+                                                                <template  v-if="(menuname=='显卡')">
+                                                                    <el-form-item   label="型号厂商">
+                                                                    {{displaymodel.graphicFactory}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="显卡型号">
+                                                                    {{displaymodel.graphicType}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="容量">
+                                                                    {{displaymodel.graphicsCapacity}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="位宽">
+                                                                    {{displaymodel.graphicsBits}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="接口类型">
+                                                                    {{displaymodel.graphicsInterface}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="定义级别">
+                                                                    {{displaymodel.graphicsClass}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="是否盒装">
+                                                                    {{displaymodel.graphicsCase}}
+                                                                    </el-form-item>
+
+                                                                </template>
+                                                                <template v-if="(menuname=='主板')">
+                                                                    <el-form-item   label="芯片类别">
+                                                                    {{displaymodel.mbChipClass}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="芯片型号">
+                                                                    {{displaymodel.mbamdChip}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="CPU插槽类别">
+                                                                    {{displaymodel.mbcpuType}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="主板集成功能">
+                                                                    {{displaymodel.mbIntegration}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="主板显示输出">
+                                                                    {{displaymodel.mbDisplayOut}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="主板PCI-E X16">
+                                                                    {{displaymodel.mbdpcie}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="主板PIC插槽个数">
+                                                                    {{displaymodel.mbdpicCount}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="适用类型">
+                                                                    {{displaymodel.mbSuitable}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="主板类型">
+                                                                    {{displaymodel.mbType}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="包装类型">
+                                                                    {{displaymodel.mbCase}}
+                                                                    </el-form-item>
+
+                                                                </template>
+                                                                <template v-if="(menuname=='内存')">
+                                                                    <el-form-item   label="容量">
+                                                                    {{displaymodel.romCapacity}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="主频">
+                                                                    {{displaymodel.rommHz}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="类别">
+                                                                    {{displaymodel.romClass}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="适用">
+                                                                    {{displaymodel.romSuitable}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="类型">
+                                                                    {{displaymodel.romddrType}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="校验">
+                                                                    {{displaymodel.romCheckout}}
+                                                                    </el-form-item>
+
+                                                                </template>
+                                                                <template v-if="(menuname=='硬盘')">
+                                                                    <el-form-item   label="适用类型">
+                                                                    {{displaymodel.hdSuitable}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="接口">
+                                                                    {{displaymodel.hdInterface}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="转速">
+                                                                    {{displaymodel.hdRotateSpeed}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="缓存容量">
+                                                                    {{displaymodel.hdCache}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="硬盘容量">
+                                                                    {{displaymodel.hdCapacity}}
+                                                                    </el-form-item>
+
+                                                                </template>
+                                                                <template v-if="(menuname=='固态硬盘')">
+                                                                    <el-form-item   label="接口类型">
+                                                                    {{displaymodel.ssdInterface}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="存储容量">
+                                                                    {{displaymodel.ssdCapacity}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="读取速度">
+                                                                    {{displaymodel.outSpeed}}
+                                                                    </el-form-item>
+                                                                </template>
+                                                                <template v-if="(menuname=='光驱')">
+                                                                    <el-form-item   label="光驱类型">
+                                                                    {{displaymodel.cdromType}}
+                                                                    </el-form-item>
+
+                                                                </template>
+                                                                <template v-if="(menuname=='显示器')">
+                                                                    <el-form-item   label="尺寸">
+                                                                    {{displaymodel.displaySize}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="视频输入">
+                                                                    {{displaymodel.displayInputType}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="其他功能">
+                                                                    {{displaymodel.displayOtherFunction}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="产品定位">
+                                                                    {{displaymodel.displayUseWay}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="外观颜色">
+                                                                    {{displaymodel.displayColor}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="背光灯类型">
+                                                                    {{displaymodel.displayBackLED}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="面板类型">
+                                                                    {{displaymodel.displayBoard}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="可视角度">
+                                                                    {{displaymodel.displayVisualAngle}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="亮度">
+                                                                    {{displaymodel.displayLuminance}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="分辨率">
+                                                                    {{displaymodel.displayDpi}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="点距">
+                                                                    {{displaymodel.displayDotPitch}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="类型">
+                                                                    {{displaymodel.displayBoard}}
+                                                                    </el-form-item>
+                                                                </template>
+                                                                <template v-if="(menuname=='机箱')">
+                                                                    <el-form-item   label="适用环境">
+                                                                    {{displaymodel.caseCondition}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="支持功能">
+                                                                    {{displaymodel.caseFunction}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="类型">
+                                                                    {{displaymodel.caseType}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="结构">
+                                                                    {{displaymodel.caseStruct}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="样式">
+                                                                    {{displaymodel.caseStyle}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="可选颜色">
+                                                                    {{displaymodel.caseColor}}
+                                                                    </el-form-item>
+                                                                </template>
+                                                                <template v-if="(menuname=='电源')">
+                                                                    <el-form-item   label="功能">
+                                                                    {{displaymodel.powerFunction}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="功率">
+                                                                    {{displaymodel.powerRange}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="80PLUS认证">
+                                                                    {{displaymodel.power80PLus}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="风扇尺寸">
+                                                                    {{displaymodel.powerFanSize}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="4+4CPU接口">
+                                                                    {{displaymodel.power4PCPU}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="4P CPU接口">
+                                                                    {{displaymodel.power44CPU}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label=""6+2P显卡">
+                                                                    {{displaymodel.power62P}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="电源类型">
+                                                                    {{displaymodel.powerType}}
+                                                                    </el-form-item>
+
+                                                                    <el-form-item   label="包装类型">
+                                                                    {{displaymodel.powerCase}}
+                                                                    </el-form-item>
+
+                                                                    <el-form-item   label="SATA硬盘接口">
+                                                                    {{displaymodel.powerSATA}}
+                                                                    </el-form-item>
+
+                                                                </template>
+                                                                <template v-if="(menuname=='散热器')">
+                                                                    <el-form-item   label="适用芯片类别">
+                                                                    {{displaymodel.cpuhsType}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="功能">
+                                                                    {{displaymodel.cpuhsFunction}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="散热适用类别">
+                                                                    {{displaymodel.cpuhsSuitable}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="热管数量">
+                                                                    {{displaymodel.cpuhsHeatPipes}}
+                                                                    </el-form-item>
+                                                                    <el-form-item   label="热管材质">
+                                                                    {{displaymodel.cpuhsClass}}
+                                                                    </el-form-item>
+
+                                                                </template>
+                                                                <template v-if="(menuname=='网卡')">
+                                                                    <el-form-item   label="网络适用类别">
+                                                                    {{displaymodel.netWokrSuitable}}
+                                                                    </el-form-item>
+
+                                                                </template>
+                                                                <el-form-item  label="价格">
+                                                                 <em style="color:red">￥</em>{{displaymodel.value}}(参考价格)
+                                                                </el-form-item>
+                                                            </el-form>
+                                                            <div slot="footer" class="dialog-footer">
+                                                                <el-button type="primary" v-on:click="dialogFormVisible = false">确 定</el-button>
+                                                            </div>
+                                           </el-dialog>
+                                        <div  class="media border container-fluid m-1 p-1"
+                                        v-for="item in datas.data.items"   >
+                                                <img :src="item.imgurl" alt=""
+                                                    class="mr-3 mt-3 rounded-circle" style="width:80px;">
+                                                <div class="media-body">
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <h4 class="border-bottom">{{item.name}}</h4>
+                                                            <span class=" row col-md-6 small text-left p-0" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                                                            硬件查询编号:{{item.id}}</span>
+                                                            <span class="col-md-6 small text-left p-0" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                                                            品牌:{{item.brand}}</span>
+                                                            <span class="col-md-6 small text-left p-0" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                                                            名称:{{item.name}}</span>
+                                                            <div class="row col-md-12 small text-left"
+                                                            style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis;" >
+                                                            <b>￥</b>:<em style="color:red">{{item.value}}</em>(参考价格)
+                                                            </div>
+
+                                                            <el-button-group class=" btn-group-sm   p-0" style="float:right">
+
+                                                                <el-button icon="el-icon-document " v-on:click="Openwindow(item)" size="mini"></el-button>
+
+
+                                                            </el-button-group>
+                                                        </div>
+                                                        <div class="  m-0 mt-4  mb-4  "  >
+
+                                                            <el-button class="" v-on:click="$emit('event-getdata', item)" icon="el-icon-circle-plus-outline" type="primary">选择
+                                                            </el-button>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                </div>
+
+                                <div class="row container">
+                                    <el-pagination background v-on:size-change="handleSizeChange"
+                                        v-on:current-change="handleCurrentChange" :current-page="indexPage"
+                                       :page-sizes="pagesizes" model:page-size="pagesize" :total="counts"
+                                        layout=" sizes, prev, pager, next, jumper">
+                                    </el-pagination>
+                                </div>
+                            </div>
+    `,
+        });
+        //右侧商品信息
+        var selectlist = new Vue({
+            el: '#selectlist',
+            data: {
+                url: "",
+                selectmenumodel: {},
+                menuname: "",
+                valuemodel: {},
+            },
+            // created: function () {
+            //     this.GetData('EnumCPUBrand');
+            // },
+            beforeUpdate() {
+
+            },
+            updated() {
+
+                // console.log("selectlist更新" + this.url);
+
+
+
+                this.$refs.usernameInput.GetData();
+                // this.datas.data.items.sort(this.sortBy('name'));
+                //     this.$forceUpdate();
+
+            },
+            created() {
+                this.getchosenmodel();
+                //  this.$forceUpdate();
+            },
+            watch: {
+                selectmenumodel: function (val) {
+
+                }
+            },
+            methods: {
+                selectedChange(val, k) {
+                    var s = Vue.set(this.selectmenumodel, k, val);
+                    //  Vue.set(this,"selectmenumodel",this.selectmenumodel);
+
+
+                },
+                getvalueoptions(val) {
+                    return getAjaxForEnumInfo(val);
+                },
+                //监听
+                getchosenmodel() {
+
+                    globalBus.$on('chosenlist', (model) => {
+                        Vue.set(this, 'selectmenumodel', model.selectmenumodel);
+                        Vue.set(this, 'valuemodel', model.valuemodel);
+                        this.url = model.url;
+                        this.menuname = model.name;
+
+                        // this.selectmenumodel = model.selectmenumodel;
+                        // this.valuemodel=model.valuemodel;
+                    });
+                },
+                setmodelvalue(enlargeAmount) {
+
+
+                    this.valuemodel.name = enlargeAmount.name;
+                    this.valuemodel.brand = enlargeAmount.brand;
+                    this.valuemodel.value = enlargeAmount.value;
+                    this.valuemodel.id = enlargeAmount.id;
+
+                },
+                refreshvalue: function (model) {
+                    // console.log(model);
+                }
+            },
+
+        });
+        ///左侧列表清单
+        var cplanlist = new Vue({
+            el: "#cplanlist",
+            data: {
+                datamodel: {
+                    cpu: {
+                        selectmenumodel: {
+                            brand: {
+                                listname: "品牌",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumCPUBrand`,
+                                selected: '',
+                            },
+
+                            cpuClass: {
+                                listname: "型号",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumcpuClass`,
+                                selected: '',
+                            },
+                            cpuCoreCount: {
+                                listname: "核心数目",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumCPUCoreCount`,
+                                selected: '',
+                            },
+                            cpuSuitable: {
+                                listname: "适用类型",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumCpuSuitable`,
+                                selected: '',
+                            },
+                            cpuTechnology: {
+                                listname: "制造工艺",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumCPUTechnology`,
+                                selected: '',
+                            },
+
+                        },
+                        valuemodel: {
+                            band: "",
+                            name: "",
+                            value: 0,
+                            id: "1",
+                        },
+                        name: "处理器",
+                        url: `${servicehost}/api/CPUAPI/CPUGetByAll`,
+                    },
+                    graphyic: {
+                        selectmenumodel: {
+                            brand: {
+                                listname: "品牌",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumGraphicsBrand`,
+                                selected: '',
+                            },
+                            graphicTypeN: {
+                                listname: "N卡",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumGraphicsNIVDA`,
+                                selected: '',
+                            },
+                            graphicTypeA: {
+                                listname: "A卡",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumGraphicsAMD`,
+                                selected: '',
+                            },
+                            graphicTypeC: {
+                                listname: "其他类别显卡",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumGraphicsOther`,
+                                selected: '',
+                            },
+                            graphicsCapacity: {
+                                listname: "容量",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumGraphicsCapacity`,
+                                selected: '',
+                            },
+                            graphicsBits: {
+                                listname: "位宽",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumGraphicsBits`,
+                                selected: '',
+                            }
+
+                        },
+                        valuemodel: {
+                            band: "",
+                            name: "",
+                            value: 0,
+                            id: "1",
+                        },
+                        name: "显卡",
+                        url: `${servicehost}/api/GraphyicsAPI/GraphyicGetByAll`,
+                    },
+                    mainboard: {
+                        selectmenumodel: {
+                            brand: {
+                                listname: "品牌",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumMBBrand`,
+                                selected: '',
+                            },
+                            // mbIntelChip: {
+                            //     listname: "Intel芯片",
+                            //     dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumMBIntelChip`,
+                            //     selected: '',
+                            // },
+                            // mbAMDChip: {
+                            //     listname: "AMD芯片",
+                            //     dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumMBAMDChip`,
+                            //     selected: '',
+                            // },
+                            mbSuitable: {
+                                listname: "适用类型",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumMBSuitable`,
+                               id: "1",
+                            },
+                            mbDisplayOut: {
+                                listname: "显示输出",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumMBDisplayOut`,
+                                selected: '',
+                            },
+                            mbCase: {
+                                listname: "包装类型",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumMBCase`,
+                                selected: '',
+                            },
+
+                        },
+                        valuemodel: {
+                            band: "",
+                            name: "",
+                            value: 0,
+                            id: "1",
+                        },
+                        name: "主板",
+                        url: `${servicehost}/api/MainboardsAPI/MainboardGetByAll`,
+                    },
+                    rom: {
+                        selectmenumodel: {
+                            brand: {
+                                listname: "品牌",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumROMBrand`,
+                                selected: '',
+                            },
+                            romCapacity: {
+                                listname: "容量",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumROMCapacity`,
+                                selected: '',
+                            },
+                            rommHz: {
+                                listname: "主频",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumROMMHz`,
+                                selected: '',
+                            },
+                            romddrType: {
+                                listname: "产品类型",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumROMDDRType`,
+                                selected: '',
+                            },
+
+                        },
+                        valuemodel: {
+                            band: "",
+                            name: "",
+                            value: 0,
+                            id: "1",
+                        },
+                        name: "内存",
+                        url: `${servicehost}/api/ROMsAPI/ROMGetByAll`,
+                    },
+                    harddisk: {
+                        selectmenumodel: {
+                            brand: {
+                                listname: "品牌",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumHDBrand`,
+                                selected: '',
+                            },
+
+                            hdInterface: {
+                                listname: "接口",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumHDInterface`,
+                                selected: '',
+                            },
+                            hdRotateSpeed: {
+                                listname: "转速",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumHDRotateSpeed`,
+                                selected: '',
+                            },
+                            hdCapacity: {
+                                listname: "容量",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumHDCapacity`,
+                                selected: '',
+                            },
+                            hdCache: {
+                                listname: "缓存",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumHDCache`,
+                                selected: '',
+                            },
+
+                        },
+                        valuemodel: {
+                            band: "",
+                            name: "",
+                            value: 0,
+                            id: "1",
+                        },
+                        name: "硬盘",
+                        url: `${servicehost}/api/HardDisksAPI/HardDiskGetByAll`,
+                    },
+                    ssd: {
+                        selectmenumodel: {
+                            brand: {
+                                listname: "品牌",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumSSDBrand`,
+                                selected: '',
+                            },
+
+                            ssdInterface: {
+                                listname: "接口类型",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumSSDInterface`,
+                                selected: '',
+                            },
+                        },
+                        valuemodel: {
+                            band: "",
+                            name: "",
+                            value: 0,
+                            id: "1",
+                        },
+                        name: "固态硬盘",
+                        url: `${servicehost}/api/ssdsAPI/ssdGetByAll`,
+                    },
+
+
+                    cdrom: {
+                        selectmenumodel: {
+                            cdromType: {
+                                listname: "光驱类型",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumCDROMType`,
+                                selected: '',
+                            },
+
+
+                        },
+                        valuemodel: {
+                            band: "",
+                            name: "",
+                            value: 0,
+                            id: "1",
+                        },
+                        name: "光驱",
+                        url: `${servicehost}/api/cdromsAPI/cdromGetByAll`,
+                    },
+
+
+                    display: {
+                        selectmenumodel: {
+                            brand: {
+                                listname: "品牌",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumDisplayBrand`,
+                                selected: '',
+                            },
+
+                            displaySize: {
+                                listname: "尺寸",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumDisplaySize`,
+                                selected: '',
+                            },
+                            displayUseWay: {
+                                listname: "适用环境",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumDisplayUseWay`,
+                                selected: '',
+                            },
+                            displayColor: {
+                                listname: "外观颜色",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumDisplayColor`,
+                                selected: '',
+                            },
+
+                        },
+                        valuemodel: {
+                            band: "",
+                            name: "",
+                            value: 0,
+                            id: "1",
+                        },
+                        name: "显示器",
+                        url: `${servicehost}/api/displaysAPI/displayGetByAll`,
+                    },
+                    case: {
+                        selectmenumodel: {
+                            brand: {
+                                listname: "品牌",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumCaseBrand`,
+                                selected: '',
+                            },
+
+                            caseCondition: {
+                                listname: "适用环境",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumCaseCondition`,
+                                selected: '',
+                            },
+                            caseFunction: {
+                                listname: "功能",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumCaseFunction`,
+                                selected: '',
+                            },
+                            caseStruct: {
+                                listname: "结构",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumCaseStruct`,
+                                selected: '',
+                            },
+
+                        },
+                        valuemodel: {
+                            band: "",
+                            name: "",
+                            value: 0,
+                            id: "1",
+                        },
+                        name: "机箱",
+                        url: `${servicehost}/api/casesAPI/caseGetByAll`,
+                    },
+                    power: {
+                        selectmenumodel: {
+                            brand: {
+                                listname: "品牌",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumCaseBrand`,
+                                selected: '',
+                            },
+
+                            powerRange: {
+                                listname: "功率区间",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumPowerRange`,
+                                selected: '',
+                            },
+
+
+                        },
+                        valuemodel: {
+                            band: "",
+                            name: "",
+                            value: 0,
+                            id: "1",
+                        },
+                        name: "电源",
+                        url: `${servicehost}/api/powersAPI/powerGetByAll`,
+                    },
+                    cpuhs: {
+                        selectmenumodel: {
+                            brand: {
+                                listname: "品牌",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumCPUHSBrand`,
+                                selected: '',
+                            },
+
+                            cpuhsType: {
+                                listname: "适用平台",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumCPUHSType`,
+                                selected: '',
+                            },
+
+
+                        },
+                        valuemodel: {
+                            band: "",
+                            name: "",
+                            value: 0,
+                            id: "1",
+                        },
+                        name: "cpu散热",
+                        url: `${servicehost}/api/cpuhsAPI/cpuhsGetByAll`,
+                    },
+                    network: {
+                        selectmenumodel: {
+                            brand: {
+                                listname: "品牌",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumNetWokrBrand`,
+                                selected: '',
+                            },
+
+                            netWokrSuitable: {
+                                listname: "类型",
+                                dataurl: `${servicehost}/API/EnumInfo/GetEnumInfo?name=EnumNetWokrSuitable`,
+                                selected: '',
+                            },
+
+                        },
+                        valuemodel: {
+                            band: "",
+                            name: "",
+                            value: 0,
+                            id: "1",
+                        },
+                        name: "网卡",
+                        url: `${servicehost}/api/networksAPI/networkGetByAll`,
+                    },
+
+
+                },
+                valuesum: 0,
+                chosenmodel: "",
+                remarksoptions: {},
+                remarks:"",
+            },
+            created() {
+
+                this.chosenmodel = this.datamodel.cpu;
+                this.GetPlanOptions();
+            },
+            updated: function () {
+                 //debugger;
+                this.GetValuesum();
+            },
+            watch: {
+                remarks(value) {
+
+                    $("#Remarks").val(value);
+
+                }
+            },
+            methods: {
+                GetPlanOptions() {
+                     //debugger;
+                    const cpme = this;
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/api/ComputersAPI/GetComputerPlanClass", //此次url改为真正需要的url
+                        beforeSend: function (xhr) {
+
+                            xhr.setRequestHeader("XSRF-TOKEN",
+
+                                $('input:hidden[name="__RequestVerificationToken"]').val());
+
+                        },
+                        success: function (data, status) {
+
+
+                                 //debugger;
+                            cpme.remarksoptions = data.data;
+                            cpme.$forceUpdate();
+
+
+                        },
+                        //success: function success(resulet) {
+
+                        //    var sel = document.getElementById("MBAMDChip");
+                        //    $("#MBAMDChip").empty();
+                        //    for (var i in resulet) {
+                        //        sel.option.add = new Option(i, resulet[i]);
+                        //    }
+
+                        //}
+                    });
+                },
+                GetValuesum() {
+                     //debugger;
+                    var value = 0;
+                    var datamodel = this.datamodel
+                    $.each(datamodel, function (index, item) {
+                         //debugger;
+                        if (item.valuemodel.value != '') {
+                            value += item.valuemodel.value;
+                        }
+
+                    });
+                    this.valuesum = value;
+                     //debugger;
+                    console.log(this.valuesum);
+                },
+                chosendata(val) {
+                    this.chosenmodel = val;
+                    // this.chosenmodel.url = val.url;
+                    /// this.chosenmodel.selectmenumodel = model;
+                    globalBus.$emit('chosenlist', this.chosenmodel);
+
+                },
+                cancel(val) {
+                    val.value = '';
+                    val.brand = '';
+                    val.name = '';
+                    val.id = '';
+                    this.GetValuesum();
+                }
+            },
+
+        });
+</script>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

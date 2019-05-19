@@ -1,0 +1,127 @@
+﻿@model DIYComputer.Entity.ComputerWareEntity.Graphyic
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_IMLayout.cshtml";
+   
+}
+
+<h2>Create</h2>
+
+<h4>Graphyic</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="GraphicFactory" class="control-label"></label>
+                <select onchange="getajax(this);" asp-for="GraphicFactory" class="form-control" asp-items="ViewBag.EnumGraphicFactory"></select>
+                <span asp-validation-for="GraphicFactory" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GraphicType" class="control-label"></label>
+                <select asp-for="GraphicType" class="form-control" asp-items="ViewBag.EnumGraphicsAMD"></select>
+                <span asp-validation-for="GraphicType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GraphicsCapacity" class="control-label"></label>
+                <input asp-for="GraphicsCapacity" class="form-control" />
+                <span asp-validation-for="GraphicsCapacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GraphicsBits" class="control-label"></label>
+                <input asp-for="GraphicsBits" class="form-control" />
+                <span asp-validation-for="GraphicsBits" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GraphicsInterface" class="control-label"></label>
+                <select multiple="multiple" asp-for=" GraphicsInterface" class="chosen-select-no-results form-control" asp-items="ViewBag.EnumGraphicsInterface">
+                    <option value=""></option>
+                </select>
+                <span asp-validation-for="GraphicsInterface" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GraphicsClass" class="control-label"></label>
+                <input asp-for="GraphicsClass" class="form-control" />
+                <span asp-validation-for="GraphicsClass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GraphicsCase" class="control-label"></label>
+                <input asp-for="GraphicsCase" class="form-control" />
+                <span asp-validation-for="GraphicsCase" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <input asp-for="Brand" class="form-control" />
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Value" class="control-label"></label>
+                <input asp-for="Value" class="form-control" />
+                <span asp-validation-for="Value" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Imgurl" class="control-label"></label>
+                <input asp-for="Imgurl" class="form-control" />
+                <span asp-validation-for="Imgurl" class="text-danger"></span>
+            </div>
+            @await Component.InvokeAsync("FileUp")
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script src="~/chosen/docsupport/jquery-3.2.1.min.js"></script>
+<script src="~/chosen/chosen.jquery.min.js" type="text/javascript"></script>
+<script src="~/chosen/docsupport/prism.js"></script>
+<script src="~/chosen/docsupport/init.js"></script>
+<script>
+    function getajax(invalue) {
+        $("#GraphicType").empty();
+        $.ajax({
+            type: "GET",
+            url: "https://localhost:5001/api/enuminfo/Getenuminfo?name=" + invalue.value, //此次url改为真正需要的url
+            beforeSend: function (xhr) {
+
+                xhr.setRequestHeader("XSRF-TOKEN",
+
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+
+            },
+            success: function (data, status) {
+                $.each(data, function (index, item) {
+                    $("#GraphicType").append( //此处向select中循环绑定数据
+                        "<option value=" + item + ">" + item + "</option>");
+                });
+            },
+            //success: function success(resulet) {
+
+            //    var sel = document.getElementById("MBAMDChip");
+            //    $("#MBAMDChip").empty();
+            //    for (var i in resulet) {
+            //        sel.option.add = new Option(i, resulet[i]);
+            //    }
+
+            //}
+        });
+
+    }
+
+</script>

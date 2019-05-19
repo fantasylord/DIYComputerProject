@@ -1,0 +1,85 @@
+﻿@model DIYComputer.Entity.ComputerWareEntity.Case
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_IMLayout.cshtml";
+}
+
+<h2>Create</h2>
+
+<h4>Case</h4>
+<hr />
+<div class="row">
+   <div class="col-md-4">
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="CaseCondition" class="control-label"></label>
+
+            <select asp-for="CaseConditions" multiple="multiple" class="form-control chosen-select-no-results" asp-items="ViewBag.EnumCaseCondition"></select>
+            <span asp-validation-for="CaseCondition" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CaseFunction" class="control-label"></label>
+
+            <select asp-for="CaseFunction" multiple="multiple" class="form-control chosen-select-no-results" asp-items="ViewBag.EnumCaseFunction"></select>
+            <span asp-validation-for="CaseFunction" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CaseType" class="control-label"></label>
+            <select asp-for="CaseType"   class="form-control chosen-select-no-results" asp-items="ViewBag.EnumCaseType"></select>
+
+            <span asp-validation-for="CaseType" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CaseStruct" class="control-label"></label>
+            <select asp-for="CaseStruct" class="form-control chosen-select-no-results" asp-items="ViewBag.EnumCaseStruct"></select>
+
+            <span asp-validation-for="CaseStruct" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CaseStyle" class="control-label"></label>
+            <select asp-for="CaseStyle" class="form-control chosen-select-no-results" asp-items="ViewBag.EnumCaseStyle"></select>
+
+            <span asp-validation-for="CaseStyle" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CaseColor" class="control-label"></label>
+            <select asp-for="CaseColors" multiple="multiple" class="form-control chosen-select-no-results" asp-items="ViewBag.EnumCaseColor"></select>
+
+            <span asp-validation-for="CaseColor" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Brand" class="control-label"></label>
+            <input asp-for="Brand" class="form-control" />
+            <span asp-validation-for="Brand" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Value" class="control-label"></label>
+            <input asp-for="Value" class="form-control" />
+            <span asp-validation-for="Value" class="text-danger"></span>
+        </div>
+        @await Component.InvokeAsync("FileUp")
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+
+    </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<script src="~/chosen/docsupport/jquery-3.2.1.min.js"></script>
+<script src="~/chosen/chosen.jquery.min.js"></script>
+<script src="~/chosen/docsupport/prism.js"></script>
+<script src="~/chosen/docsupport/init.js"></script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

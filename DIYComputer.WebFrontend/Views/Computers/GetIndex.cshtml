@@ -1,0 +1,652 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="container ">
+
+    <div id="ComputerList" class="col-md-12 row p-2">
+        <div class=" row pl-3 ">
+            <el-button-group class="row m-1">
+                <el-button v-on:click='sort' size="mini" icon="el-icon-refresh">
+
+                </el-button>
+                <el-button v-on:click='sortup' size="mini" icon="el-icon-sort-up">
+                    价格升序
+                </el-button>
+                <el-button v-on:click='sortdown' size="mini" icon="el-icon-sort-down">
+                    价格降序
+                </el-button>
+
+
+            </el-button-group>
+            <div class="row  m-1   p-0">
+                <el-select v-model="remarks" size="mini" clearable placeholder="请选择">
+                    <el-option v-for="item in remarksoptions"
+                               :value="item">
+                    </el-option>
+                </el-select>
+            </div>
+
+            <div class="row  m-1   p-0">
+                <el-input type="number" size='mini' v-model="searchforid" placeholder="请输入查找编号" clearable>
+                    <el-button slot="append" v-on:click='sortforid(searchforid)' icon="el-icon-search"></el-button>
+                </el-input>
+            </div>
+            <!-- <div class="col-md-1">
+                                <a v-on:click='sortadd' href="#" class="btn btn-default ">
+                                    <span class="glyphicon .glyphicon-heart"></span>收藏
+                                </a>
+                            </div>
+                            <div class="col-md-1">
+                                <a v-on:click='sortclick' href="#" class="btn btn-default ">
+                                    <span class=".glyphicon .glyphicon-hand-up"></span>点击
+                                </a>
+                            </div> -->
+        </div>
+        <div class="row pl-3  ">
+            <div class="col-md-12  m-1   p-0">
+                <el-input type="number" class="col-md-5 p-0 m-0" size='mini' v-model="valuemin" placeholder="价格区间" clearable>
+
+                </el-input>
+                到
+                <el-input type="number" class="col-md-5 p-0 m-0" size='mini' v-model="valuemax" placeholder="价格区间" clearable>
+
+                </el-input>
+                <el-button slot="append" size="mini" v-on:click='sortforvalue(valuemin,valuemax)' icon="el-icon-search"></el-button>
+            </div>
+        </div>
+        <div class="col-md-12 row">
+
+
+            <el-dialog title="提示" :visible.sync="dialogFormVisible" width="60%" :before-close="handleClose">
+
+                <table v-if="dialogFormVisible==true" class="container-fluid table">
+                    <thead class="row">
+                        <tr class="container ">
+                            <h3 class="text-center">装机配置清单</h3>
+                        </tr>
+                    </thead>
+                    <tr class="row">
+
+                        <th class="col-md-2 text-center">
+                            硬件类别
+                        </th>
+                        <th class="col-md-2 text-center">
+                            编号
+                        </th>
+                        <th class="col-md-2 text-center">
+                            名称
+                        </th>
+                        <th class="col-md-2 text-center">
+                            品牌
+                        </th>
+
+                        <th class="col-md-3 text-center">
+                            参考价格
+                        </th>
+
+                    </tr>
+                    <tr class="row">
+                        <td class="col-md-2">
+                            <label>处理器</label>
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   V-model="displaymodel.cpu.id" />
+
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.cpu.name" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.cpu.brand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.cpu.value" />
+
+                        </td>
+
+                    </tr>
+                    <tr class="row">
+                        <td class="col-md-2">
+                            <label>显卡</label>
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.graphyic.id" />
+
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.graphyic.name" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.graphyic.brand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.graphyic.value" />
+
+                        </td>
+
+                    </tr>
+                    <tr class="row">
+                        <td class="col-md-2">
+                            <label>主板</label>
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.mainboard.id" />
+
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.mainboard.name" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.mainboard.brand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.mainboard.value" />
+
+                        </td>
+                    </tr>
+
+                    <tr class="row">
+                        <td class="col-md-2">
+                            <label>内存</label>
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.rom.id" />
+
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.rom.name" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.rom.brand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.rom.value" />
+
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="col-md-2">
+                            <label>硬盘</label>
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.hardDisk.id" />
+
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.hardDisk.name" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.hardDisk.brand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.hardDisk.value" />
+
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="col-md-2">
+                            <label>固态</label>
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.ssd.id" />
+
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.ssd.name" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.ssd.brand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.ssd.value" />
+
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="col-md-2">
+                            <label>光驱</label>
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.cdrom.id" />
+
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.cdrom.name" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.cdrom.brand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.cdrom.value" />
+
+                        </td>
+                    </tr>
+
+                    <tr class="row">
+                        <td class="col-md-2">
+                            <label>显示器</label>
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.display.id" />
+
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.display.name" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.display.brand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.display.value" />
+
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="col-md-2">
+                            <label>机箱</label>
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.case.id" />
+
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.case.name" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.case.brand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.case.value" />
+
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="col-md-2">
+                            <label>电源</label>
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.power.id" />
+
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.power.name" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.power.brand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.power.value" />
+
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="col-md-2">
+                            <label>CPU散热器</label>
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.cpuhs.id" />
+
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.cpuhs.name" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.cpuhs.brand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.cpuhs.value" />
+
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="col-md-2">
+                            <label>网卡</label>
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.netWork.id" />
+
+                        </td>
+                        <td class="col-md-2">
+
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.netWork.name" />
+                        </td>
+                        <td class="col-md-2">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.netWork.brand" />
+                        </td>
+                        <td class="col-md-3">
+                            <input class=" text-center   " style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.netWork.value" />
+
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td colspan="2">
+                            <label class="mr-auto">合计</label>
+                        </td>
+                        <td class="col-md-4 ml-auto ">
+                            <input type="number" class="  text-center  btn-sm  "
+                                   style="border: none;background: none" readonly="readonly"
+                                   v-model="displaymodel.valueSum" />
+
+                        </td>
+                        <td>
+                            <btn class="btn btn-link btn-sm" v-on:click="printpage(displaymodel.id)"  >打印清单</btn>
+                        </td>
+                    </tr>
+                </table>
+
+
+
+            </el-dialog>
+            <div class="col-md-12 row pre-scrollable   " style="min-height:300px;">
+                <div v-for="item in listmodel " class="col-md-3  bg-default table border  m-1 p-2">
+
+
+                    <h4 class="text-center">{{item.planName}}</h4>
+                    <p>方案编号：{{item.id}}</p>
+                    <p>方案作者:{{item.user.name}}</p>
+                    <p>方案估价:<em style="color:red">￥{{item.valueSum}}</em></p>
+                    <p>方案创建时间:{{item.createTime}}</p>
+                    <div classs="row p-4">相关:{{item.remarks}}</div>
+                    <div class="row m-1  ">
+
+                        <button v-on:click="OpenDialog(item)"
+                                class="col-md-6 btn btn-outline-primary   btn-sm ml-auto">
+                            详情
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row container">
+            <el-pagination background v-on:size-change="handleSizeChange" v-on:current-change="handleCurrentChange"
+                :current-page="pageindex" :page-sizes="pagesizes" :page-size="pagesize" :total="counts"
+                layout="total, sizes, prev, pager, next, jumper">
+            </el-pagination>
+        </div> -->
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+        var servicehost = " http://47.95.197.57:5500";
+
+        var ComputerList = new Vue({
+            el: "#ComputerList",
+            data: {
+                datas: {
+
+                },
+                selectmenumodel: {},
+                listmodel:{},
+                pagesize: 5,
+                pagesizes: [1, 2, 5, 10],
+                counts: 0,
+                pageindex: 1,
+                totalPage: 1,
+                searchvalue: '名字',
+                displaymodel: {},
+                dialogFormVisible: false,
+                searchforid: '',
+                valuemax:0,
+                valuemin:0,
+                remarks:"",
+            },
+            watch:{
+                valuemin(val){
+                    this.valuemax=val;
+                },
+                remarks(val){
+                    if(val==""||val==null)
+                    this.listmodel=this.datas.data.items
+                    else
+                    this.listmodel=this.datas.data.items.filter(function(item){
+                        debugger;
+                        return  item.remarks==null?false:item.remarks.indexOf(val)>=0
+                    });
+                    debugger;
+                }
+            },
+            created() {
+                this.GetData(this.indexPage, this.pagesize);
+                this.listmodel=this.datas.data.items;
+                this.GetPlanOptions();
+            },
+            methods: {
+                OpenDialog(val) {
+                    debugger;
+                    this.displaymodel = val;
+                    this.dialogFormVisible = true;
+                },
+                handleSizeChange(val) {
+
+                    this.GetData({
+                        indexPage: this.indexPage,
+                        pageSize: val
+                    })
+                    this.pagesize = val
+                },
+                handleCurrentChange(val) {
+                    this.GetData({
+                        indexPage: val,
+                        pageSize: this.pagesize
+                    })
+                    this.pageindex = val
+                },
+                GetPlanOptions() {
+                     //debugger;
+                    const cpme = this;
+
+                    $.ajax({
+                        type: "GET",
+                        url: `${servicehost}/api/ComputersAPI/GetComputerPlanClass`, //此次url改为真正需要的url
+                        beforeSend: function (xhr) {
+
+                            xhr.setRequestHeader("XSRF-TOKEN",
+
+                                $('input:hidden[name="__RequestVerificationToken"]').val());
+
+                        },
+                        success: function (data, status) {
+
+
+                                 //debugger;
+                            cpme.remarksoptions = data.data;
+                            cpme.$forceUpdate();
+
+
+                        },
+                        //success: function success(resulet) {
+
+                        //    var sel = document.getElementById("MBAMDChip");
+                        //    $("#MBAMDChip").empty();
+                        //    for (var i in resulet) {
+                        //        sel.option.add = new Option(i, resulet[i]);
+                        //    }
+
+                        //}
+                    });
+                },
+                sortforvalue(vmin,vmax){
+
+                    this.listmodel=this.datas.data.items.filter(function(item){
+
+                        return (item.valueSum>=vmin)&&(item.valueSum<=vmax);
+
+                    });
+                },
+                // ReturnToModel: function (data, typeid) {
+
+                //     // $.each(data, function (index, item) {
+                //     //     var model={
+                //     //         'brand':{'value':item.brand,'text':'品牌'},
+                //     //         'name':{"name":item.name},
+                //     //         'brand':{"value":item.brand},
+                //     //         'brand':{"value":item.brand},
+                //     //     }
+                //     // });
+                //     switch (n) {
+                //         case 1:
+                //             `执行代码块 1`
+                //             break;
+                //         case 2:
+                //             `执行代码块 2`
+                //             break;
+                //         default:
+                //             `n 与 case 1 和 case 2 不同时执行的代码`
+                //     }
+                // },
+                printpage(val) {
+
+                    window.open(`/PrintPage?id=${val}`, "_blank");
+                },
+                GetData({ indexPage = 1, pageSize = 10 } = {}) {
+                    const me = this;
+                    var result = "";
+                    var url = this.url;
+                    debugger;
+                    $.ajax({
+                        url: `${servicehost}/API/ComputersAPI/GetAllComputer?indexPage=${indexPage}&Size=${pageSize}`, //  <!-- url  :请求地址 -->
+                        type: 'GET', //　<!--type ：请求类型:post/get --> ,
+                        dataType: 'json', //   <!--dataType:服务器返回的数据类型 text/xml/script/html/json/jsonp -->
+                        // xhrFields: {
+                        //     withCredentials: true
+                        // },
+                        async: false,
+                        // crossDomain: true,
+                        contentType: "application/json",
+                        success: function (setdata) { //　<!--回调函数 -->
+                            // // console.log(data); //      <! -- 浏览器控制台显示返回内容（建议使用） -->
+                            // console.log("result"); //      <! -- 浏览器控制台显示返回内容（建议使用） -->
+                            debugger;
+                            me.datas = setdata;
+                            debugger;
+                        },
+                        error: function (data) {
+                            // console.log(data);
+                        },
+
+                    });
+                },
+
+                sort() {
+
+                    this.listmodel=this.datas.data.items;
+                },
+                sortup() {
+                    this.datas.data.items.sort(this.sortBy('valueSum'))
+                },
+                sortdown() {
+                    this.datas.data.items.sort(this.sortBy('valueSum', false))
+                },
+                sortbrand() {
+                    this.datas.data.items.sort(this.sortBy('brand'))
+                },
+                sortname() {
+                    this.datas.data.items.sort(this.sortBy('name'))
+                },
+                sortadd() {
+                    this.datas.data.items.sort(this.sortBy('addCount', false))
+                },
+                sortclick() {
+                    this.datas.data.items.sort(this.sortBy('mounthCount', false))
+                },
+                reverse() {
+                    this.datas.data.items.reverse()
+                },
+                sortforid(val){
+                    this.listmodel=  this.datas.data.items.filter(function(item){
+
+                        return item.id==val
+
+                    });
+                },
+                sortBy: function (attr, rev) {
+                    //第二个参数没有传递 默认升序排列
+                    if (rev == undefined) {
+                        rev = 1;
+                    } else {
+                        rev = (rev) ? 1 : -1;
+                    }
+                    return function (a, b) {
+                        a = a[attr];
+                        b = b[attr];
+                        if (a < b) {
+                            return rev * -1;
+                        }
+                        if (a > b) {
+                            return rev * 1;
+                        }
+                        return 0;
+                    }
+                }
+
+
+            }
+
+        });
+</script>
+

@@ -1,0 +1,269 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model DIYComputer.DtoModel.SysDto.TopicContentModel;
+
+@{
+
+    string service = DIYComputer.Config.FrontEndConfig.ServiceConfig.APIServices;
+}
+<div class=" container">
+    <div class="row">
+
+        <div class="row">
+            <label class="col-md-4 p-0 m-0" asp-for="Title"></label>
+            <input class="col-md-6 p-0 m-0 " asp-for="Title" style="border:none;background:none" readonly />
+        </div>
+        <iframe class=" container-fluid border" style="min-height:960px;" src="@{<text> @service@Model.ContentURL</text>} "></iframe>
+        <table class="row col-md-6  table  ml-auto p-0">
+            <tr class="row">
+                <td class="col-md-2">作者：</td>
+                <td class="col-md-2"><input asp-for="Account" style="border:none;background:none" class="p-0 m-0" readonly /></td>
+                <td class="col-md-3"><label asp-for="CreateTime"></label></td>
+                <td class="col-md-4"><input asp-for="CreateTime" style="border:none;background:none" readonly /></td>
+            </tr>
+        </table>
+    </div>
+    <div class="container ">
+        <div id="ComputerList" class="col-md-12 row">
+            <div class="col-md-10 row  pl-3 " style="min-height:300px;">
+                <div class="row col-md-2 p-0 m-0  bg-gray-light">
+                    <p class="text-primary">发表评论</p>
+                </div>
+                <div class="row col-md-12 p-0 m-0">
+                    <form class="container p-0 m-0" asp-controller="Replies" asp-action="ReplieForID" method="post">
+                        <input asp-for="Id" hidden />
+                        <textarea style="min-height:200px" name="Rcontent" id="Rcontent" class="row col-md-12 form-control p-0  ">
+        
+                                </textarea>
+                        <div class="row col-md-2 ml-auto">
+                            <button type="submit" class="btn btn-outline btn-link btn-sm" onclick="return saveplan();" size="mini">回复评论</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <el-button-group class="row col-md-12 p-0 ">
+                <el-button v-on:click='sort' size="mini" icon="el-icon-refresh">
+                    刷新
+                </el-button>
+            </el-button-group>
+            <div class="col-md-12 row pre-scrollable   " style="min-height:300px;">
+                <div v-for="item in listmodel " class=" row col-md-11 form-control table border   ">
+                    <div class="col-md-12 row">
+                        <div class="col-md-3">{{item.userName}}</div>
+                        <div class="col-md-9 offset-1">
+                            {{item.content}}
+                        </div>
+                    </div>
+                    <div class="col-md-6 ml-auto text-right">{{item.editTime}}</div>
+                </div>
+
+            </div>
+            <div class="row container">
+                <el-pagination background v-on:size-change="handleSizeChange" v-on:current-change="handleCurrentChange"
+                               :current-page="pageindex" :page-sizes="pagesizes" :page-size="pagesize" :total="counts"
+                               layout="total, sizes, prev, pager, next, jumper">
+                </el-pagination>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            //var servicehost = " http://47.95.197.57:5500";
+            var servicehost = GetConfigForServiceAPI();
+            function saveplan() {
+
+                if (!checkLogin()) {
+                    alert("请先登录");
+                    return false;
+                }
+
+                if ($("#Rcontent").val().length <=0) {
+                    alert("评论内容为空！");
+                    return false;
+                }
+
+                return true;
+
+            }
+            var ComputerList = new Vue({
+                el: "#ComputerList",
+                data: {
+                    datas: {
+
+                    },
+                    selectmenumodel: {},
+                    listmodel: {},
+                    pagesize: 5,
+                    pagesizes: [5, 10, 20, 100],
+                    counts: 0,
+                    pageindex: 1,
+                    totalPage: 1,
+                    searchvalue: '名字',
+                    selecttopicid: 0,
+
+                    searchforid: '',
+                    searchstr: '',
+                    topicclassoptions: [],
+                    valuemax: 0,
+                    valuemin: 0,
+                    topicClassID: "",
+                },
+                watch: {
+
+                },
+                created() {
+                    this.GetData();
+
+                    this.listmodel = this.datas.data.items;
+
+                },
+                methods: {
+                    OpenDialog(val) {
+
+                        this.displaymodel = val;
+                        this.dialogFormVisible = true;
+                    },
+                    details(url, userID) {
+                        if (userID == 1)
+                            window.open(``, "_blank");
+                    },
+                    handleSizeChange(val) {
+
+                        this.LocalData({
+                            pageindex: this.pageindex,
+                            pageSize: val
+                        })
+                        this.pagesize = val
+                    },
+                    handleCurrentChange(val) {
+                        this.LocalData({
+                            pageindex: val,
+                            pageSize: this.pagesize
+                        })
+                        this.pageindex = val;
+                    },
+                    LocalData({ pageindex = 1,
+                        pageSize = 10
+                    } = {}) {
+
+                        this.listmodel = this.datas.data.items.filter(function (item) {
+
+                            return (item.id > (pageindex * pageSize - pageSize)) &&
+                                (item.id <= (pageindex * pageSize))
+                        });
+
+
+                    },
+
+                    GetData({
+                        indexPage = 1,
+                        pageSize = 10
+                    } = {}) {
+                        const me = this;
+                        var result = "";
+                        var url = this.url;
+                        var topicod = "@{<text> @Model.Id </text>}";
+                        $.ajax({
+                            url: `${servicehost}/api/TopicsAPI/GetRepliesForID?topicid=${topicod}`, //  <!-- url  :请求地址 -->
+                            type: 'GET', //　<!--type ：请求类型:post/get --> ,
+                            dataType: 'json', //   <!--dataType:服务器返回的数据类型 text/xml/script/html/json/jsonp -->
+                            // xhrFields: {
+                            //     withCredentials: true
+                            // },
+                            async: false,
+                            // crossDomain: true,
+                            contentType: "application/json",
+                            success: function (setdata) { //　<!--回调函数 -->
+                                // // console.log(data); //      <! -- 浏览器控制台显示返回内容（建议使用） -->
+                                // console.log("result"); //      <! -- 浏览器控制台显示返回内容（建议使用） -->
+                                debugger;
+
+                                $.each(setdata.data.items, function (index, item) {
+
+                                    var date = new Date(item.editTime);
+
+                                    var dateresult = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+
+
+                                    item.editTime = dateresult;
+
+                                });
+                                me.datas = setdata;
+                                me.counts = setdata.data.items.length;
+                                debugger;
+                            },
+                            error: function (data) {
+                                // console.log(data);
+                            },
+
+                        });
+                    },
+
+                    sort() {
+
+                        this.listmodel = this.datas.data.items;
+                    },
+                    sortup() {
+                        this.datas.data.items.sort(this.sortBy('replies'))
+                    },
+                    sortdown() {
+                        this.datas.data.items.sort(this.sortBy('replies', false))
+                    },
+                    sortbrand() {
+                        this.datas.data.items.sort(this.sortBy('brand'))
+                    },
+                    sortname() {
+                        this.datas.data.items.sort(this.sortBy('name'))
+                    },
+                    sortadd() {
+                        this.datas.data.items.sort(this.sortBy('addCount', false))
+                    },
+                    sortclick() {
+                        this.datas.data.items.sort(this.sortBy('mounthCount', false))
+                    },
+                    reverse() {
+                        this.datas.data.items.reverse()
+                    },
+                    sortforstr(val) {
+
+
+                        this.listmodel = this.datas.data.items.filter(function (item) {
+
+                            return item.outline == true ? false : item.outline.indexOf(val) >= 0
+                        });
+                    },
+                    sortforid(val) {
+                        this.listmodel = this.datas.data.items.filter(function (item) {
+
+                            return item.id == val
+
+                        });
+                    },
+                    sortBy: function (attr, rev) {
+                        //第二个参数没有传递 默认升序排列
+                        if (rev == undefined) {
+                            rev = 1;
+                        } else {
+                            rev = (rev) ? 1 : -1;
+                        }
+                        return function (a, b) {
+                            a = a[attr];
+                            b = b[attr];
+                            if (a < b) {
+                                return rev * -1;
+                            }
+                            if (a > b) {
+                                return rev * 1;
+                            }
+                            return 0;
+                        }
+                    }
+
+
+                }
+
+            });
+        </script>
+
+    </div>
+</div>

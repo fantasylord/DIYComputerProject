@@ -1,0 +1,88 @@
+﻿@model DIYComputer.DtoModel.SysDto.UserLoginModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="~/AdminLTE-2.4.5/dist/bootstrap.css">
+    <!-- Font Awesome -->
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="~/AdminLTE-2.4.5/dist/css/ionicons.css">
+    <link rel="stylesheet" href="~/AdminLTE-2.4.5/plugins/iCheck/square/blue.css" />
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/AdminLTE-2.4.5/dist/css/AdminLTE.css">
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+          page. However, you can choose any other skin. Make sure you
+          apply the skin class to the body tag so the changes take effect. -->
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css">
+        <link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.css">
+        <link rel="stylesheet" href="~/css/AdminLTE.css">*@
+    <!--皮肤-->
+    <link rel="stylesheet" href="~/AdminLTE-2.4.5/dist/css/skins/skin-blue.css">
+    @* <link rel="stylesheet" href="~/css/skins/skin-blue.css">*@
+    <link rel="stylesheet" href="~/css/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/chosen/docsupport/jquery-3.2.1.min.js"></script>
+    <script src="~/chosen/chosen.jquery.min.js" type="text/javascript"></script>
+    <script src="~/chosen/docsupport/prism.js"></script>
+    <script src="~/chosen/docsupport/init.js"></script>
+</head>
+<body style="background-image:url(/assets/img/backgrounds/1.jpg);background-repeat:no-repeat;background-size:cover">
+    <div class="hold-transition   has-feedback ">
+        <div class="login-box ">
+            <div class="login-logo" style="color:whitesmoke">
+                <a asp-controller="Home" asp-action="Index"><b>Diy攒积平台</b></a>
+            </div>
+            <!-- /.login-logo -->
+            <div class="login-box-body">
+                <p class="login-box-msg">测试账号test03/test123</p>
+                <form asp-action="login" id="login-form">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group  has-feedback">
+                        <label asp-for="Account" class="control-label"></label>
+                        <input asp-for="Account" class="form-control" value="AdminLogin" placeholder="请输入登录账户" />
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                        <span asp-validation-for="Account" class="text-danger"></span>
+                    </div>
+                    <div class="form-group  has-feedback">
+                        <label asp-for="PW" class="control-label"></label>
+                        <input type="password" asp-for="PW" class="form-control" value="123456" placeholder="请输入密码" />
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        <span asp-validation-for="PW" class="text-danger"></span>
+                    </div>
+                    @await Component.InvokeAsync("VierificationCode")
+                    <div class="col-md-12 row">
+                        <input value="@Model.Message" readonly="readonly" style="border:none" class="col-xs-10 control-label" />
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-xs-12">
+                            <button type="submit" value="Login" class="btn btn-danger btn-block btn-flat col-xs-5">登 录</button>
+                            <a asp-controller="Users" asp-action="Register" value="Register" class="btn btn-danger btn-block btn-flat col-xs-5">注 册</a>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- /.login-box-body -->
+            </div>
+            <!-- /.login-box -->
+        </div>
+    </div>
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</body>
+</html>

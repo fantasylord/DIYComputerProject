@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Mylayout";
+}
+<div class="container">
+    <div id="demo" class="carousel slide" data-ride="carousel" data-interval="6000">
+
+        <!-- 指示符 -->
+        <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+
+        <!-- 轮播图片 -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="img-rounded" src="~/images/banner1.jpg" style="height:300px;width:1080px; overflow:hidden"/>
+            </div>
+            <div class="carousel-item">
+                <img class="img-rounded" src="~/images/banner2.jpg" style="height:300px;width:1080px; overflow:hidden"/>
+            </div>
+            <div class="carousel-item">
+                <img class="img-rounded"src="~/images/banner3.jpg" style="height:300px;width:1080px; overflow:hidden"/>
+            </div>
+        </div>
+
+        <!-- 左右切换按钮 -->
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <h3>如何辨别电商电脑主机是否二手翻新硬件？</h3>
+            <ul>
+                <li><div>
+    近年来电商圈大量涌现了使用二手翻新的CPU、显卡、主板等硬件的电脑主机，什么i7级E5处理器都是一些三文不值二文的洋垃圾，这些硬件通常已经停产了十年左右，其它硬件都是同时期产物，各个品牌型号也不详细，专坑电脑小白，严重损害消费者利益。由于经常会有用户拿着这些二手充新的电脑配置来咨询装机之家小编，所以今天装机之家来揭秘i7级E5电脑主机猫腻，呼吁大家千万不要再上当受骗了。
+</div></li>
+            
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <h2>推荐</h2>
+            <ul>
+                <li><a href="/TopicDetails?id=1">购置方案推荐普通家庭</a></li>
+                <li><a href="/TopicDetails?id=2">购置方案推荐日常办公</a></li>
+                <li><a href="/TopicDetails?id=3">购置方案推荐家庭影院</a></li>
+                <li><a href="/TopicDetails?id=4">购置方案推荐普通家庭</a></li>
+             
+            </ul>
+        </div>
+        <div class="col-md-3">
+            <h2>Overview</h2>
+            <ul>
+                <li><div>
+                小米 在北京举办了小米9周年员工庆典，小米创始人雷军进行了演讲。
+
+                据了解，雷军认为在这9年中小米还是做了一些事，最大的变化就是小米消灭了中国的山寨手机。小米要做最好的手机，只卖一半的价格，推动移动互联网的普及。“历史已经铭记，我们做到了！”雷军认为。
+
+                小米在这里庆祝小米9岁生日的同时，也明确表示踏上了创业第二阶段的号角。
+
+                “小米的故事开始进入第二章，我们的未来还会经历很多很多的改变，就像过去9年一样，我们始终保持机敏、拥抱变化，不断改进我们的战术，变得更强大、更成熟、更稳健。”雷军提到。
+            </div></li>
+              
+            </ul>
+        </div>
+
+    </div>
+    <div class="row">
+
+        @await Component.InvokeAsync("CGroup", new { ip = "http://47.95.197.57", port = "5500", controller = "API/CPUAPI", actionname = "CPUGetByAll" })
+    </div>
+</div>

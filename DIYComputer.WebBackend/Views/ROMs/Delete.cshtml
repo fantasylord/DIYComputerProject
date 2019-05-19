@@ -1,0 +1,83 @@
+﻿@model DIYComputer.Entity.ComputerWareEntity.ROM
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_IMLayout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ROM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ROMCapacity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ROMCapacity)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ROMMHz)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ROMMHz)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ROMClass)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ROMClass)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ROMSuitable)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ROMSuitable)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ROMDDRType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ROMDDRType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ROMCheckout)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ROMCheckout)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Brand)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Brand)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Value)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Value)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Imgurl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Imgurl)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ID" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

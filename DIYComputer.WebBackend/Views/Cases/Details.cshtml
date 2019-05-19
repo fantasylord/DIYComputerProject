@@ -1,0 +1,85 @@
+﻿@model DIYComputer.Entity.ComputerWareEntity.Case
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_IMLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Case</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CaseCondition)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CaseCondition)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CaseFunction)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CaseFunction)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CaseType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CaseType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CaseStruct)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CaseStruct)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CaseStyle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CaseStyle)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CaseColor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CaseColor)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Brand)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Brand)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Value)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Value)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HardWareEnum)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HardWareEnum)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Imgurl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Imgurl)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<DIYComputer.DtoModel.SysDto.TopicContentModel>
+
+@{
+   
+     Layout = "_MyUserLayout"; 
+}
+
+<h2>View</h2>
+
+<p>
+    <a asp-action="CreateTopic" >Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Account)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EditTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Remarks)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EditTime)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Remarks)
+            </td>
+            <td class="">
+                <a class="btn btn-warning btn-sm" asp-action="Delete" asp-route-id="@item.Id">删除</a>
+                <a class="btn btn-info btn-xs"  href="@item.ContentURL">查看网页</a>
+                <a class="btn btn-info btn-xs" asp-action="EditorTopic" asp-route-id="@item.Id">编辑文章</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<script>
+    function isDetelte() {
+        if (confirm("确认是否删除?")) {
+            return true;
+        }
+        else
+            return false;
+    }
+</script>

@@ -1,0 +1,60 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model  DIYComputer.Util.CommonModel.PageSplitModel<DIYComputer.Entity.ComputerWareEntity.CGroutBaseEntity>
+
+@{
+    int order = ViewBag["order"];
+    int index = ViewBag["index"];
+    bool isBegin = false;
+    bool isEnd = false;
+    if (index > 1)
+    { isBegin = true; }
+    if (index * 10 <= Model.Items.Count)
+    { isEnd = true; }
+    int i = 0;
+    Layout = "_contextLayout";
+}
+<script>
+    if(!@isBegin)
+        $("#firstpage").addClass("disabled");
+        if(!@isEnd)
+    $("#lastpage").addClass("disabled");
+</script>
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model.Items.Skip((index - 1) * 10))
+        {
+            if (i++ > 10)
+            { break; }
+
+            <div class="col-md-3  col-sm-offset-1">
+                <input style="border:none" readonly asp-for="@item.ID" />
+                <div class="row">
+                    <div class="col-sm-10 col-md-10 col-sm-offset-1">
+                        <a href="#" class="thumbnail">
+                            <img src="@item.Imgurl"
+                                 alt="通用的占位符缩略图">
+                        </a>
+                    </div>
+                </div>
+                <a href="#" class="fa-link"><p>@item.Name</p></a>
+                <p style="color:red;"><em>*</em>参考价位: @item.Value.ToString()</p>
+                <div class="row">
+                    <p class="col-sm-10 col-md-5 col-md-offset-1">点击数:@item.MounthCount</p>
+                    <p class="col-sm-10 col-md-5">收藏数:@item.AddCount</p>
+                </div>
+                <div class="row">
+                    <button class="btn btn-default btn-info col-sm-4 col-sm-offset-2">收藏</button>
+                    <button class="btn btn-default btn-info col-sm-4 col-sm-offset-2">相关介绍</button>
+                </div>
+            </div>
+        }
+    </div>
+    <ul class="pagination">
+        <li><a href="#" id="firstpage" >&laquo;</a></li>
+         <li><p>当前第 @ViewBag["index"] 页</p></li>
+        <li><a href="#" id="lastpage">&raquo;</a></li>
+    </ul>
+</div>
+

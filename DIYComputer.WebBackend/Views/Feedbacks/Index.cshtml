@@ -1,0 +1,66 @@
+﻿@model IEnumerable<DIYComputer.Entity.SysEntity.Feedback>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table table-hover ">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FeedContent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ishandle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostMan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EditTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Remarks)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FeedContent)
+            </td>
+            <td  @if (item.Ishandle == "未处理") {<text> class="bg-red" </text> }>
+                @Html.DisplayFor(modelItem => item.Ishandle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostMan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EditTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remarks)
+            </td>
+            <td>
+
+                <a asp-action="Details" asp-route-id="@item.Id">详情</a> |
+                <a asp-action="PostOK" asp-route-id="@item.Id">确认解决</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">删除</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

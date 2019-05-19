@@ -1,0 +1,136 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@*@model  CoreBackend.CMS.ViewModel.Modules.PageSplitModel<CoreBackend.CMS.Entitys.ComputerGroupMode.CGroutBaseEntity >*@
+
+
+@{
+    Layout = null;
+    var url = ViewBag.ip + ":" + ViewBag.port + "/" + ViewBag.controller + "/" + ViewBag.actionname;
+    var serverhots = ViewBag.ip + ":" + ViewBag.port;
+}
+<div class="container ">
+
+    <div id="CGroupList">
+
+        <ol class="row">
+            <todo-item v-for="item in datas.data.items" v-bind:todo="item" v-bind:key="item.id">
+            </todo-item>
+        </ol>
+    </div>
+
+
+</div>
+
+<script type="text/javascript">
+        function ajaxgetCPUasync(reurl, callback) {
+
+            var result = "";
+            var actionurl=" @{ <text> @url </text>} ";
+            debugger;
+            $.ajax({
+                url: actionurl, //  <!-- url  :请求地址 -->
+                type: 'GET', //　<!--type ：请求类型:post/get --> ,
+                dataType: 'json', //   <!--dataType:服务器返回的数据类型 text/xml/script/html/json/jsonp -->
+                // xhrFields: {
+                //     withCredentials: true
+                // },
+                async: true,
+                // crossDomain: true,
+                contentType: "application/json",
+                success: function (data) { //　<!--回调函数 -->
+                    // console.log(data); //      <! -- 浏览器控制台显示返回内容（建议使用） -->
+                    console.log("result"); //      <! -- 浏览器控制台显示返回内容（建议使用） -->
+                    result = data;
+                    console.log(data.data.items); //      <! -- 浏览器控制台显示返回内容（建议使用） -->
+                    debugger;
+                    // jsondata = data;
+                    callback(result);
+
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+
+            });
+            console.log("runend");
+
+        };
+
+        function ajaxgetCPU() {
+
+            var result;
+              var actionurl=" @{ <text> @url </text>} ";
+            $.ajax({
+                url: actionurl, //  <!-- url  :请求地址 -->
+                type: 'GET', //　<!--type ：请求类型:post/get --> ,
+                dataType: 'json', //   <!--dataType:服务器返回的数据类型 text/xml/script/html/json/jsonp -->
+                // xhrFields: {
+                //     withCredentials: true
+                // },
+                async: false,
+                // crossDomain: true,
+                contentType: "application/json",
+                success: function (data) { //　<!--回调函数 -->
+                    // console.log(data); //      <! -- 浏览器控制台显示返回内容（建议使用） -->
+                    console.log("result"); //      <! -- 浏览器控制台显示返回内容（建议使用） -->
+                    $.each(data.data.items, function (index, item) {
+                        item.imgurl = '@{<text>@serverhots</text> }' + item.imgurl.replace('\\\\', "/")
+                            // item.actionUrl = 'http://47.95.197.57:5500'+'/api/CPUAPI' + item.imgurl.replace('\\\\', "/")
+                            .replace(';', '');
+                        item.displayImg = '@{<text>@serverhots</text> }' + item.displayImg;
+                    });
+
+                    result = data;
+                    //window.location.host;
+                    console.log(data.data.items); //      <! -- 浏览器控制台显示返回内容（建议使用） -->
+                },
+                error: function (data) {
+                    console.log(data);
+                },
+
+            });
+            console.log("runend");
+
+            return result;
+        };
+        Vue.component('todo-item', {
+            template: `<ul class="col-md-3">
+                  
+               
+                      <div class=" form-group">
+                   <img v-bind:src="todo.displayImg" class=" container  img-thumbnail" alt="Cinque Terre"/>
+                                  
+                  <p class="container">名称:{{todo.name}} 品牌{{todo.brand}}</p>
+
+               <p class="container  "><b>￥</b>:<em style="color:red">{{todo.value}}</em></p>
+               <p class="container "> <span>收藏:{{todo.addCount}}</span> <span>点击数:{{todo.mounthCount}}</span></p>
+
+               <div class="text-right">
+                <button class="btn btn-default btn-success  btn-sm" >收藏</button>
+                <button class="btn btn-default btn-info  btn-sm">相关介绍</button>
+               </div>
+              </div>
+                 </ul>`,
+
+            props: ['todo']
+        });
+        var CGroupList = new Vue({
+            el: '#CGroupList',
+            data: {
+                datas: "",
+            },
+            created: function () {
+
+                this.GetData();
+                console.log("change\n" + this.datas);
+
+            },
+            methods: {
+                GetData: function () {
+                    this.datas = ajaxgetCPU();
+                }
+            },
+        });
+</script>
+

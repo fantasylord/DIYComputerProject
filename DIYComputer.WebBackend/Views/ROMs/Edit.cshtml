@@ -1,0 +1,77 @@
+﻿@model DIYComputer.Entity.ComputerWareEntity.ROM
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_IMLayout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<h4>ROM</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ROMCapacity" class="control-label"></label>
+                <input asp-for="ROMCapacity" class="form-control" />
+                <span asp-validation-for="ROMCapacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ROMMHz" class="control-label"></label>
+                <input asp-for="ROMMHz" class="form-control" />
+                <span asp-validation-for="ROMMHz" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ROMClass" class="control-label"></label>
+                <input asp-for="ROMClass" class="form-control" />
+                <span asp-validation-for="ROMClass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ROMSuitable" class="control-label"></label>
+                <input asp-for="ROMSuitable" class="form-control" />
+                <span asp-validation-for="ROMSuitable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ROMDDRType" class="control-label"></label>
+                <input asp-for="ROMDDRType" class="form-control" />
+                <span asp-validation-for="ROMDDRType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ROMCheckout" class="control-label"></label>
+                <input asp-for="ROMCheckout" class="form-control" />
+                <span asp-validation-for="ROMCheckout" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <input asp-for="Brand" class="form-control" />
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Value" class="control-label"></label>
+                <input asp-for="Value" class="form-control" />
+                <span asp-validation-for="Value" class="text-danger"></span>
+            </div>
+            @await Component.InvokeAsync("FileUp")
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

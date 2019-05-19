@@ -1,0 +1,331 @@
+﻿@model DIYComputer.Entity.SysEntity.Computer;
+
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "_MyUserLayout";
+}
+<h2>Details</h2>
+<div>
+    <h4>电脑配置详情</h4>
+    <hr />
+    <tr class="row">
+        <td colspan="2">
+            <div class="form-group">
+                <label asp-for="PlanName" class="control-label"></label>
+                <input asp-for="PlanName" style="border: none;background: none"
+                       readonly="readonly" class="form-control" />
+                <span asp-validation-for="PlanName" class="text-danger"></span>
+            </div>
+        </td>
+    </tr>
+    <table class="container-fluid table">
+        <thead class="row">
+            <tr class="container ">
+                <h3 class="text-center">装机配置清单</h3>
+            </tr>
+        </thead>
+        <tr class="row">
+            <th class="col-md-2 text-center">
+                硬件类别
+            </th>
+            <th class="col-md-2 text-center">
+                编号
+            </th>
+            <th class="col-md-2 text-center">
+                名称
+            </th>
+            <th class="col-md-2 text-center">
+                品牌
+            </th>
+            <th class="col-md-3 text-center">
+                参考价格
+            </th>
+        </tr>
+        <tr class="row">
+            <td class="col-md-2">
+                <label asp-for="CPUId"></label>
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="CPU.ID" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="CPU.Name" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="CPU.Brand" />
+            </td>
+            <td class="col-md-3">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="CPU.Value" />
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="col-md-2">
+                <label asp-for="GraphyicId"></label>
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="Graphyic.ID" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="Graphyic.Name" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="Graphyic.Brand" />
+            </td>
+            <td class="col-md-3">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="Graphyic.Value" />
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="col-md-2">
+                <label asp-for="MainboardId"></label>
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="Mainboard.ID" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="Mainboard.Name" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="Mainboard.Brand" />
+            </td>
+            <td class="col-md-3">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="Mainboard.Value" />
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="col-md-2">
+                <label asp-for="ROMId"></label>
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="ROM.ID" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="ROM.Name" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="ROM.Brand" />
+            </td>
+            <td class="col-md-3">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="ROM.Value" />
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="col-md-2">
+                <label asp-for="HardDiskId"></label>
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="HardDisk.ID" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="HardDisk.Name" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="HardDisk.Brand" />
+            </td>
+            <td class="col-md-3">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="HardDisk.Value" />
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="col-md-2">
+                <label asp-for="SSDId"></label>
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="SSD.ID" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="SSD.Name" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="SSD.Brand" />
+            </td>
+            <td class="col-md-3">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="SSD.Value" />
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="col-md-2">
+                <label asp-for="CDROMId"></label>
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="CDROM.ID" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="CDROM.Name" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="CDROM.Brand" />
+            </td>
+            <td class="col-md-3">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="CDROM.Value" />
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="col-md-2">
+                <label asp-for="DisplayId"></label>
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="Display.ID" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="Display.Name" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="Display.Brand" />
+            </td>
+            <td class="col-md-3">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="Display.Value" />
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="col-md-2">
+                <label asp-for="CaseId"></label>
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="Case.ID" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="Case.Name" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="Case.Brand" />
+            </td>
+            <td class="col-md-3">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="Case.Value" />
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="col-md-2">
+                <label asp-for="PowerId"></label>
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="Power.ID" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="Power.Name" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="Power.Brand" />
+            </td>
+            <td class="col-md-3">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="Power.Value" />
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="col-md-2">
+                <label asp-for="CPUHSId"></label>
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="CPUHS.ID" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="CPUHS.Name" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="CPUHS.Brand" />
+            </td>
+            <td class="col-md-3">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="CPUHS.Value" />
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="col-md-2">
+                <label asp-for="NetWorkId"></label>
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="NetWork.ID" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="NetWork.Name" />
+            </td>
+            <td class="col-md-2">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="NetWork.Brand" />
+            </td>
+            <td class="col-md-3">
+                <input class=" text-center   " style="border: none;background: none"
+                       readonly="readonly" asp-for="NetWork.Value" />
+            </td>
+        </tr>
+        <tr class="row">
+            <td colspan="2">
+                <label>合计</label>
+            </td>
+            <td colspan="2">
+                <input type="number" class=" text-center  btn-sm  "
+                       style="border: none;background: none" readonly="readonly" asp-for="ValueSum" />
+            </td>
+        </tr>
+    </table>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EditTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EditTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+    </dl>
+</div>
+<div>
+
+    <a asp-action="Index">Back to List</a>
+</div>

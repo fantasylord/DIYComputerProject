@@ -1,0 +1,103 @@
+﻿@model DIYComputer.Entity.ComputerWareEntity.Power
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_IMLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Power</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PowerFunction)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PowerFunction)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PowerRange)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PowerRange)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Power80PLus)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Power80PLus)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PowerFanSize)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PowerFanSize)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Power44CPU)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Power44CPU)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Power4PCPU)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Power4PCPU)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Power62P)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Power62P)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PowerType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PowerType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PowerCase)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PowerCase)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Brand)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Brand)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Value)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Value)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HardWareEnum)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HardWareEnum)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Imgurl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Imgurl)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

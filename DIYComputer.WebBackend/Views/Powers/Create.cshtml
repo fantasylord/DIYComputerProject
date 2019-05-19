@@ -1,0 +1,99 @@
+﻿@model DIYComputer.Entity.ComputerWareEntity.Power
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_IMLayout.cshtml";
+}
+
+<h2>Create</h2>
+
+<h4>Power</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PowerFunction" class="control-label"></label>
+                <select asp-for="PowerFunctions" class="chosen-select-no-results form-control" asp-items="ViewBag.EnumPowerFunction"></select>
+                <span asp-validation-for="PowerFunction" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PowerRange" class="control-label"></label>
+                <input asp-for="PowerRange" class="form-control" />
+                <span asp-validation-for="PowerRange" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Power80PLus" class="control-label"></label>
+                <input asp-for="Power80PLus" class="form-control" />
+                <span asp-validation-for="Power80PLus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PowerFanSize" class="control-label"></label>
+                <input asp-for="PowerFanSize" class="form-control" />
+                <span asp-validation-for="PowerFanSize" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Power44CPU" class="control-label"></label>
+                <input asp-for="Power44CPU" class="form-control" />
+                <span asp-validation-for="Power44CPU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Power4PCPU" class="control-label"></label>
+                <input asp-for="Power4PCPU" class="form-control" />
+                <span asp-validation-for="Power4PCPU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Power62P" class="control-label"></label>
+                <input asp-for="Power62P" class="form-control" />
+                <span asp-validation-for="Power62P" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PowerType" class="control-label"></label>
+                <input asp-for="PowerType" class="form-control" />
+                <span asp-validation-for="PowerType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PowerCase" class="control-label"></label>
+                <input asp-for="PowerCase" class="form-control" />
+                <span asp-validation-for="PowerCase" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PowerSATA" class="control-label"></label>
+                <input asp-for="PowerSATA" class="form-control" />
+                <span asp-validation-for="PowerSATA" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <input asp-for="Brand" class="form-control" />
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Value" class="control-label"></label>
+                <input asp-for="Value" class="form-control" />
+                <span asp-validation-for="Value" class="text-danger"></span>
+            </div>
+            @await Component.InvokeAsync("FileUp")
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<script src="~/chosen/docsupport/jquery-3.2.1.min.js"></script>
+<script src="~/chosen/chosen.jquery.min.js"></script>
+<script src="~/chosen/docsupport/prism.js"></script>
+<script src="~/chosen/docsupport/init.js"></script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,82 @@
+﻿@model IEnumerable<DIYComputer.Entity.ComputerWareEntity.CPUHS>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_IMLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CPUHSType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CPUHSFunction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CPUHSSuitable)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.CPUHSClass)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HardWareEnum)
+            </th>
+   
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CPUHSType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CPUHSFunction)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CPUHSSuitable)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.CPUHSClass)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HardWareEnum)
+            </td>
+   
+            <td>
+                <a class="btn btn-info btn-xs" asp-action="Details" asp-route-id="@item.ID">详情</a> |
+                <a class="btn btn-success btn-xs" asp-action="Edit" asp-route-id="@item.ID">编辑</a> |
+                <a class="btn btn-warning btn-xs" asp-action="Delete" asp-route-id="@item.ID">删除</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

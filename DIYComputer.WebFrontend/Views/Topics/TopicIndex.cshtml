@@ -1,0 +1,335 @@
+﻿
+@{
+    ViewData["Title"] = "TopicIndex";
+}
+
+<div class="container ">
+
+    <div id="ComputerList" class="col-md-12 row p-2">
+        <div class=" row pl-3 ">
+            <el-button-group class="row m-1">
+                <el-button v-on:click='sortup' size="mini" icon="el-icon-sort-up">
+                    评论数
+                </el-button>
+                <el-button v-on:click='sortdown' size="mini" icon="el-icon-sort-down">
+                    评论数
+                </el-button>
+            </el-button-group>
+            <div class="row  m-1   p-0">
+                <el-select v-model="remarks" size="mini" clearable placeholder="请选择">
+                    <el-option v-for="item in topicclassoptions" :value="item.id" :label="item.name">
+                    </el-option>
+                </el-select>
+            </div>
+            <div class="row  m-1   p-0">
+                <el-input type="text" size='mini' v-model="searchstr" placeholder="请输入关键字" clearable>
+                    <el-button slot="append" v-on:click='sortforstr(searchstr)' icon="el-icon-search"></el-button>
+                </el-input>
+            </div>
+            <div class="row  m-1   p-0">
+                <el-input type="number" class="p-0 m-0" size='mini' v-model="searchforid" placeholder="请输入查找编号" clearable>
+                    <el-button slot="append" v-on:click='sortforid(searchforid)' icon="el-icon-search"></el-button>
+                </el-input>
+            </div>
+            <!-- <div class="col-md-1">
+                                <a v-on:click='sortadd' href="#" class="btn btn-default ">
+                                    <span class="glyphicon .glyphicon-heart"></span>收藏
+                                </a>
+                            </div>
+                            <div class="col-md-1">
+                                <a v-on:click='sortclick' href="#" class="btn btn-default ">
+                                    <span class=".glyphicon .glyphicon-hand-up"></span>点击
+                                </a>
+                            </div> -->
+        </div>
+
+        <div class="col-md-12 row">
+
+            <div class="col-md-12 row pre-scrollable   " style="min-height:600px;">
+                <div v-for="item in listmodel " class="col-md-12  row  bg-default table border   ">
+
+
+                    <h4 class="col-md-10 row  ">文章标题:{{item.title}}</h4>
+                    <div class="col-md-2">文章编号：{{item.id}}</div>
+                    <div classs="row col-md-12">
+                        <span class="col-md-1">简述:</span><span class="col-md-11 control">{{item.outline}}</span>
+                    </div>
+                    <div class="row col-md-12">
+
+
+
+                        <div class="col-md-3">文章类别：{{item.todivicClassID}}</div>
+                        <div class="col-md-3">文章作者:{{item.userName}}</div>
+                        <div class="col-md-3">参与回复数:<em style="color:skyblue">{{item.replies}}</em></div>
+                        <div class="col-md-6">文章创建时间:{{item.createTime}}</div>
+                        <div class="col-md-6">最后修改时间:{{item.editTime}}</div>
+                    </div>
+                    <div classs=" row col-md-12 ">
+                        <span class="col-md-1">备注:</span><span class="col-md-11">{{item.remarks}}</span>
+                    </div>
+                    <div class=" col-md-12 row m-1  ">
+
+                        <button v-on:click="details(item.contentURL,item.id)" class="col-md-4 btn btn-outline-primary   btn-sm ml-auto">详情</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row container">
+            <el-pagination background v-on:size-change="handleSizeChange" v-on:current-change="handleCurrentChange"
+                :current-page="pageindex" :page-sizes="pagesizes" :page-size="pagesize" :total="counts"
+                layout="total, sizes, prev, pager, next, jumper">
+            </el-pagination>
+        </div> -->
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+       // var servicehost = " http://47.95.197.57:5500";
+        var servicehost = GetConfigForServiceAPI();
+
+        var ComputerList = new Vue({
+            el: "#ComputerList",
+            data: {
+                datas: {
+
+                },
+                selectmenumodel: {},
+                listmodel: {},
+                pagesize: 5,
+                pagesizes: [1, 2, 5, 10],
+                counts: 0,
+                pageindex: 1,
+                totalPage: 1,
+                searchvalue: '名字',
+                selecttopicid: 0,
+
+                searchforid: '',
+                searchstr: '',
+                topicclassoptions: [],
+                valuemax: 0,
+                valuemin: 0,
+                topicClassID: "",
+            },
+            watch: {
+                valuemin(val) {
+                    this.valuemax = val;
+                },
+                topicClassID(val) {
+                    if (val == "" || val == null)
+                        this.listmodel = this.datas.data.items
+                    else
+                        this.listmodel = this.datas.data.items.filter(function (item) {
+                            debugger;
+                            return item.topicClassID == null ? false : item.topicClassID.indexOf(val) >= 0
+                        });
+                    debugger;
+                }
+            },
+            created() {
+                this.GetData(this.indexPage, this.pagesize);
+                this.listmodel = this.datas.data.items;
+                this.GetPlanOptions();
+            },
+            methods: {
+                OpenDialog(val) {
+                    debugger;
+                    this.displaymodel = val;
+                    this.dialogFormVisible = true;
+                },
+                details(url, id = 1) {
+                    console.log(url + " " + id);
+
+                    window.open(`/TopicDetails?id=${id}`, "_blank");
+                },
+                handleSizeChange(val) {
+
+                    this.GetData({
+                        indexPage: this.indexPage,
+                        pageSize: val
+                    })
+                    this.pagesize = val
+                },
+                handleCurrentChange(val) {
+                    this.GetData({
+                        indexPage: val,
+                        pageSize: this.pagesize
+                    })
+                    this.pageindex = val
+                },
+                GetPlanOptions() {
+                    //debugger;
+                    const cpme = this;
+
+                    $.ajax({
+                        type: "GET",
+                        url: `${servicehost}/api/TopicsAPI/GetTopicClass`, //此次url改为真正需要的url
+                        beforeSend: function (xhr) {
+
+                            xhr.setRequestHeader("XSRF-TOKEN",
+
+                                $('input:hidden[name="__RequestVerificationToken"]').val());
+
+                        },
+                        success: function (data, status) {
+
+
+                            //debugger;
+                            cpme.topicclassoptions = data.data;
+                            cpme.$forceUpdate();
+
+
+                        },
+                        //success: function success(resulet) {
+
+                        //    var sel = document.getElementById("MBAMDChip");
+                        //    $("#MBAMDChip").empty();
+                        //    for (var i in resulet) {
+                        //        sel.option.add = new Option(i, resulet[i]);
+                        //    }
+
+                        //}
+                    });
+                },
+                sortforvalue(vmin, vmax) {
+
+                    this.listmodel = this.datas.data.items.filter(function (item) {
+
+                        return (item.valueSum >= vmin) && (item.valueSum <= vmax);
+
+                    });
+                },
+                // ReturnToModel: function (data, typeid) {
+
+                //     // $.each(data, function (index, item) {
+                //     //     var model={
+                //     //         'brand':{'value':item.brand,'text':'品牌'},
+                //     //         'name':{"name":item.name},
+                //     //         'brand':{"value":item.brand},
+                //     //         'brand':{"value":item.brand},
+                //     //     }
+                //     // });
+                //     switch (n) {
+                //         case 1:
+                //             `执行代码块 1`
+                //             break;
+                //         case 2:
+                //             `执行代码块 2`
+                //             break;
+                //         default:
+                //             `n 与 case 1 和 case 2 不同时执行的代码`
+                //     }
+                // },
+                GetData({
+                    indexPage = 1,
+                    pageSize = 10
+                } = {}) {
+                    const me = this;
+                    var result = "";
+                    var url = this.url;
+                    debugger;
+                    $.ajax({
+                        url: `${servicehost}/api/TopicsAPI/GetTopicsAll?indexPage=${indexPage}&Size=${pageSize}`, //  <!-- url  :请求地址 -->
+                        type: 'GET', //　<!--type ：请求类型:post/get --> ,
+                        dataType: 'json', //   <!--dataType:服务器返回的数据类型 text/xml/script/html/json/jsonp -->
+                        // xhrFields: {
+                        //     withCredentials: true
+                        // },
+                        async: false,
+                        // crossDomain: true,
+                        contentType: "application/json",
+                        success: function (setdata) { //　<!--回调函数 -->
+                            // // console.log(data); //      <! -- 浏览器控制台显示返回内容（建议使用） -->
+                            // console.log("result"); //      <! -- 浏览器控制台显示返回内容（建议使用） -->
+                            debugger;
+                            $.each(setdata.data.items,function(index,item){
+
+                                     var editdate = new Date(item.editTime);
+                                     var cratedate=new Date(item.createTime);
+                                     var editresult = editdate.getFullYear()+'-'+(editdate.getMonth()+1)+'-'+editdate.getDate();
+                                     var createresult = cratedate.getFullYear()+'-'+(cratedate.getMonth()+1)+'-'+cratedate.getDate();
+
+
+                                     item.editTime=editresult;
+                                     item.createTime=createresult;
+
+                                 });
+                            me.datas = setdata;
+                            debugger;
+                        },
+                        error: function (data) {
+                            // console.log(data);
+                        },
+
+                    });
+                },
+
+                sort() {
+
+                    this.listmodel = this.datas.data.items;
+                },
+                sortup() {
+                    this.datas.data.items.sort(this.sortBy('replies'))
+                },
+                sortdown() {
+                    this.datas.data.items.sort(this.sortBy('replies', false))
+                },
+                sortbrand() {
+                    this.datas.data.items.sort(this.sortBy('brand'))
+                },
+                sortname() {
+                    this.datas.data.items.sort(this.sortBy('name'))
+                },
+                sortadd() {
+                    this.datas.data.items.sort(this.sortBy('addCount', false))
+                },
+                sortclick() {
+                    this.datas.data.items.sort(this.sortBy('mounthCount', false))
+                },
+                reverse() {
+                    this.datas.data.items.reverse()
+                },
+                sortforstr(val) {
+
+                    debugger;
+                    this.listmodel = this.datas.data.items.filter(function (item) {
+
+                        return item.outline==true?false:item.outline.indexOf(val) >= 0
+                    });
+                },
+                sortforid(val) {
+                    this.listmodel = this.datas.data.items.filter(function (item) {
+
+                        return item.id == val
+
+                    });
+                },
+                sortBy: function (attr, rev) {
+                    //第二个参数没有传递 默认升序排列
+                    if (rev == undefined) {
+                        rev = 1;
+                    } else {
+                        rev = (rev) ? 1 : -1;
+                    }
+                    return function (a, b) {
+                        a = a[attr];
+                        b = b[attr];
+                        if (a < b) {
+                            return rev * -1;
+                        }
+                        if (a > b) {
+                            return rev * 1;
+                        }
+                        return 0;
+                    }
+                }
+
+
+            }
+
+        });
+</script>
+
+

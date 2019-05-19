@@ -1,0 +1,28 @@
+﻿@model DIYComputer.Entity.SysEntity.TopicClass
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_IMLayout.cshtml";
+}
+<h2>Details</h2>
+<div>
+    <h4>TopicClass</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ParentNode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ParentNode.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

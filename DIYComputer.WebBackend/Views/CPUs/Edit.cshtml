@@ -1,0 +1,76 @@
+﻿@model DIYComputer.Entity.ComputerWareEntity.CPU
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_IMLayout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<h4>CPU</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CPUClass" class="control-label"></label>
+                <select asp-for="CPUClass" class="form-control" asp-items="ViewBag.EnumCPUClass"></select>
+                <span asp-validation-for="CPUClass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CPUCoreCount" class="control-label"></label>
+                <select asp-for="CPUCoreCount" class="form-control" asp-items="ViewBag.EnumCPUCoreCount"></select>
+                <span asp-validation-for="CPUCoreCount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CpuSuitable" class="control-label"></label>
+                <select asp-for="CpuSuitable" class="form-control" asp-items="ViewBag.EnumCpuSuitable"></select>
+                <span asp-validation-for="CpuSuitable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CPUType" class="control-label"></label>
+                <select asp-for="CPUType " class="form-control" asp-items="ViewBag.EnumCPUType"></select>
+                <span asp-validation-for="CPUType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CPUIsCase" class="control-label"></label>
+                <select asp-for="CPUIsCase " class="form-control" asp-items="ViewBag.EnumCPUIsCase"></select>
+                <span asp-validation-for="CPUIsCase" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CPUTechnology" class="control-label"></label>
+                <select asp-for="CPUTechnology " class="form-control" asp-items="ViewBag.EnumCPUTechnology"></select>
+                <span asp-validation-for="CPUTechnology" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Brand" class="control-label"></label>
+                <select asp-for="Brand " class="form-control" asp-items="ViewBag.EnumCPUBrand"></select>
+                <span asp-validation-for="Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Value" class="control-label"></label>
+                <input asp-for="Value" class="form-control" />
+                <span asp-validation-for="Value" class="text-danger"></span>
+            </div>
+            @await Component.InvokeAsync("FileUp")
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
