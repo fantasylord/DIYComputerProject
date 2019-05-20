@@ -16,7 +16,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using NLog.Extensions.Logging;
 using System.IO;
 using System.Linq;
 using UEditorNetCore;
@@ -141,8 +143,10 @@ namespace DIYComputer.WebBackend
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, EFDBContext context)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, EFDBContext context,ILoggerFactory loggerFactory)
         {
+
+            loggerFactory.AddNLog();
             app.UseDeveloperExceptionPage();
             //if (env.IsDevelopment())
             //{
