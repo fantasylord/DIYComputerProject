@@ -118,54 +118,54 @@ namespace DIYComputer.Entity.DBContext
 
             _modelBuilder.Entity<Computer>()
                 .HasOne(o => o.User)
-                .WithMany().OnDelete(DeleteBehavior.SetNull);
+                .WithMany().OnDelete(DeleteBehavior.Restrict);
             _modelBuilder.Entity<Computer>()
                 .HasOne(o => o.Case)
-                .WithMany().OnDelete(DeleteBehavior.SetNull);
+                .WithMany().OnDelete(DeleteBehavior.Restrict);
 
             _modelBuilder.Entity<Computer>()
                 .HasOne(o => o.CDROM)
-                .WithMany().OnDelete(DeleteBehavior.SetNull);
+                .WithMany().OnDelete(DeleteBehavior.Restrict);
 
             _modelBuilder.Entity<Computer>()
                 .HasOne(o => o.CPU)
-                  .WithMany().OnDelete(DeleteBehavior.SetNull);
+                  .WithMany().OnDelete(DeleteBehavior.Restrict);
 
             _modelBuilder.Entity<Computer>()
                 .HasOne(o => o.CPUHS)
-                  .WithMany().OnDelete(DeleteBehavior.SetNull);
+                  .WithMany().OnDelete(DeleteBehavior.Restrict);
 
             _modelBuilder.Entity<Computer>()
                 .HasOne(o => o.Display)
-                  .WithMany().OnDelete(DeleteBehavior.SetNull);
+                  .WithMany().OnDelete(DeleteBehavior.Restrict);
 
             _modelBuilder.Entity<Computer>()
                 .HasOne(o => o.Graphyic)
-                  .WithMany().OnDelete(DeleteBehavior.SetNull);
+                  .WithMany().OnDelete(DeleteBehavior.Restrict);
 
             _modelBuilder.Entity<Computer>()
                 .HasOne(o => o.HardDisk)
-                  .WithMany().OnDelete(DeleteBehavior.SetNull);
+                  .WithMany().OnDelete(DeleteBehavior.Restrict);
 
             _modelBuilder.Entity<Computer>()
                 .HasOne(o => o.Mainboard)
-                  .WithMany().OnDelete(DeleteBehavior.SetNull);
+                  .WithMany().OnDelete(DeleteBehavior.Restrict);
 
             _modelBuilder.Entity<Computer>()
                 .HasOne(o => o.NetWork)
-                  .WithMany().OnDelete(DeleteBehavior.SetNull);
+                  .WithMany().OnDelete(DeleteBehavior.Restrict);
 
             _modelBuilder.Entity<Computer>()
                 .HasOne(o => o.Power)
-                  .WithMany().OnDelete(DeleteBehavior.SetNull);
+                  .WithMany().OnDelete(DeleteBehavior.Restrict);
 
             _modelBuilder.Entity<Computer>()
                 .HasOne(o => o.ROM)
-                  .WithMany().OnDelete(DeleteBehavior.SetNull);
+                  .WithMany().OnDelete(DeleteBehavior.Restrict);
 
             _modelBuilder.Entity<Computer>()
                 .HasOne(o => o.SSD)
-                  .WithMany().OnDelete(DeleteBehavior.SetNull);
+                  .WithMany().OnDelete(DeleteBehavior.Restrict);
 
 
         }

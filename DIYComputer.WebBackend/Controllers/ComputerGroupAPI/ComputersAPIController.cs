@@ -5,6 +5,7 @@ using DIYComputer.Entity.SysEntity;
 using DIYComputer.Util;
 using DIYComputer.Util.CommonModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -124,11 +125,23 @@ namespace DIYComputer.WebBackend.Controllers.ComputerGroupAPI
             string s = "";
             var resmodel = _context.Computers.Where(
 
-
                   o => (o.PlanName.IndexOf(planname)>=0 &&
                        (o.ValueSum >= valuesum1 && o.ValueSum <= valuesum2))
 
-                ).Skip(((indexPage-1) > 0 ? indexPage-1 : 0) *( size > 0 ? size : 0)).ToList();
+                ).Skip(((indexPage-1) > 0 ? indexPage-1 : 0) *( size > 0 ? size : 0))
+                            .Include(o => o.Case)
+                            .Include(o => o.CDROM)
+                            .Include(o => o.CPU)
+                            .Include(o => o.CPUHS)
+                            .Include(o => o.Display)
+                            .Include(o => o.Graphyic)
+                            .Include(o => o.HardDisk)
+                            .Include(o => o.Mainboard)
+                            .Include(o => o.NetWork)
+                            .Include(o => o.Power)
+                            .Include(o => o.ROM)
+                            .Include(o => o.SSD)
+                            .ToList();
                if(username.Length>0)
             {
                 foreach (var item in resmodel)
@@ -155,18 +168,7 @@ namespace DIYComputer.WebBackend.Controllers.ComputerGroupAPI
                     Name = User.Name,
                 };
 
-                item.Case = _context.Cases.FirstOrDefault(o => o.ID == item.CaseId);
-                item.CDROM = _context.CDROMs.FirstOrDefault(o => o.ID == item.CDROMId);
-                item.CPU = _context.CPUs.FirstOrDefault(o => o.ID == item.CPUId);
-                item.CPUHS = _context.CPUHs.FirstOrDefault(o => o.ID == item.CPUHSId);
-                item.Display = _context.Displays.FirstOrDefault(o => o.ID == item.DisplayId);
-                item.Graphyic = _context.Graphyics.FirstOrDefault(o => o.ID == item.GraphyicId);
-                item.HardDisk = _context.HardDisks.FirstOrDefault(o => o.ID == item.HardDiskId);
-                item.Mainboard = _context.Mainboards.FirstOrDefault(o => o.ID == item.MainboardId);
-                item.NetWork = _context.NetWorks.FirstOrDefault(o => o.ID == item.NetWorkId);
-                item.Power = _context.Powers.FirstOrDefault(o => o.ID == item.PowerId);
-                item.ROM = _context.ROMs.FirstOrDefault(o => o.ID == item.ROMId);
-                item.SSD = _context.SSDs.FirstOrDefault(o => o.ID == item.SSDId);
+              
 
             }
             PageSplitModel<ComputerDto> result = new PageSplitModel<ComputerDto>(lc, indexPage, size, resmodel.Count);
