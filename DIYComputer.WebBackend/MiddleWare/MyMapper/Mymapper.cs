@@ -1,7 +1,7 @@
-﻿using AutoMapper;
+﻿
+
+using AutoMapper;
 using DIYComputer.Service.IServices;
-using DIYComputer.Service.Services;
-using System;
 using System.Linq;
 using System.Reflection;
 
