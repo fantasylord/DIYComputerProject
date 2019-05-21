@@ -56,6 +56,7 @@ namespace DIYComputer.Entity.DBContext
         {
             //Database.IsInMemory();
             Database.EnsureCreated();
+          
             //#if DEBUG
 
             //            try
@@ -86,7 +87,7 @@ namespace DIYComputer.Entity.DBContext
 
             _modelBuilder.ApplyConfiguration(new UserConfiguration());
 
-
+           
 
             _modelBuilder.Entity<MenuNode>()
                 .HasMany(node => node.Childnodes)
@@ -113,6 +114,7 @@ namespace DIYComputer.Entity.DBContext
                 .HasOne(x => x.User)
                 .WithMany(x => x.Replies).OnDelete(DeleteBehavior.Cascade);
 
+            
 
             _modelBuilder.Entity<Computer>()
                 .HasOne(o => o.User)

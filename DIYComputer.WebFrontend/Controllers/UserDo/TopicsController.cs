@@ -36,6 +36,19 @@ namespace DIYComputer.WebFrontend.Controllers.UserDo
       
         public async Task<ActionResult> Index()
         {
+            //var dblist =   (from o in _dbcontext.TopicClasses.AsNoTracking()
+            //                    orderby o.CreateTime descending
+            //                    select new TopicClass
+            //                    {
+            //                        Childnodes = o.Childnodes,
+            //                        CreateTime = o.CreateTime,
+            //                        EditTime = o.EditTime,
+            //                        Id = o.Id,
+            //                        Name = o.Name,
+            //                        ParentNode = o.ParentNode,
+            //                    }
+            //                 ).ToList();
+
             List<Topic> list = new List<Topic>();
             var user = UsersController.GetUser(_dbcontext, _accessor);
             var dbmodellist= _dbcontext.Topics.Where(o=>o.User.Id==user.Id).ToList();

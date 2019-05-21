@@ -64,7 +64,7 @@ namespace DIYComputer.WebFrontend
             {
                 options.UseMySQL(constr);
             });
-
+          
             ////令牌缓存
             //services.AddSingleton<IMemoryCache>(factory =>
             //{

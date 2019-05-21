@@ -17,7 +17,7 @@ namespace DIYComputer.WebFrontend.Controllers.UserDo
         private readonly EFDBContext _context;
         private readonly IHttpContextAccessor _accseeor;
 
-        public ComputersController(EFDBContext context,IHttpContextAccessor accessor)
+        public ComputersController(EFDBContext context, IHttpContextAccessor accessor)
         {
             _context = context;
             _accseeor = accessor;
@@ -26,24 +26,27 @@ namespace DIYComputer.WebFrontend.Controllers.UserDo
         // GET: Computers
         public async Task<IActionResult> Index()
         {
-            User user = UsersController.GetUser(_context, _accseeor);
-            var result = await _context.Computers.Where(o=>o.UserID== user.Id).ToListAsync();
 
-            foreach (var item in result)
-            {
-                item.Case = _context.Cases.FirstOrDefault(o => o.ID == item.CaseId);
-                item.CDROM = _context.CDROMs.FirstOrDefault(o => o.ID == item.CDROMId);
-                item.CPU = _context.CPUs.FirstOrDefault(o => o.ID == item.CPUId);
-                item.CPUHS = _context.CPUHs.FirstOrDefault(o => o.ID == item.CPUHSId);
-                item.Display = _context.Displays.FirstOrDefault(o => o.ID == item.DisplayId);
-                item.Graphyic = _context.Graphyics.FirstOrDefault(o => o.ID == item.GraphyicId);
-                item.HardDisk = _context.HardDisks.FirstOrDefault(o => o.ID == item.HardDiskId);
-                item.Mainboard = _context.Mainboards.FirstOrDefault(o => o.ID == item.MainboardId);
-                item.NetWork = _context.NetWorks.FirstOrDefault(o => o.ID == item.NetWorkId);
-                item.Power = _context.Powers.FirstOrDefault(o => o.ID == item.PowerId);
-                item.ROM = _context.ROMs.FirstOrDefault(o => o.ID == item.ROMId);
-                item.SSD = _context.SSDs.FirstOrDefault(o => o.ID == item.SSDId);
-            }
+            Console.WriteLine("===============computer读取开始=============");
+            DateTime times = DateTime.Now;
+            User user = UsersController.GetUser(_context, _accseeor);
+      
+            var result =   _context.Computers.Where(o => o.UserID == user.Id)
+                            .Include(o => o.Case)
+                            .Include(o => o.CDROM)
+                            .Include(o => o.CPU)
+                            .Include(o => o.CPUHS)
+                            .Include(o => o.Display)
+                            .Include(o => o.Graphyic)
+                            .Include(o => o.HardDisk)
+                            .Include(o => o.Mainboard)
+                            .Include(o => o.NetWork)
+                            .Include(o => o.Power)
+                            .Include(o => o.ROM)
+                            .Include(o => o.SSD)
+                            .ToListAsync();
+        
+          
             return View(result);
         }
 
@@ -130,8 +133,10 @@ namespace DIYComputer.WebFrontend.Controllers.UserDo
             computer.PlanName = Convert.ToString(HttpContext.Request.Form["PlanName"]);
             computer.User = UsersController.GetUser(_context, _accseeor);
             computer.UserID = UsersController.GetUser(_context, _accseeor).Id;
+
             if (ModelState.IsValid)
             {
+               
                 _context.Add(computer);
                 await _context.SaveChangesAsync();
 
@@ -151,11 +156,11 @@ namespace DIYComputer.WebFrontend.Controllers.UserDo
         [HttpGet]
         [Route("PrintPage")]
         [AllowAnonymous]
-        public IActionResult PrintPage(int id=-1)
+        public IActionResult PrintPage(int id = -1)
         {
 
             var remodel = _context.Computers.FirstOrDefault(o => o.Id == id);
-            
+
             if (remodel != null)
             {
 
