@@ -27,11 +27,11 @@ namespace DIYComputer.WebFrontend.Controllers.UserDo
         public async Task<IActionResult> Index()
         {
 
-            Console.WriteLine("===============computer读取开始=============");
+
             DateTime times = DateTime.Now;
             User user = UsersController.GetUser(_context, _accseeor);
-      
-            var result =   _context.Computers.Where(o => o.UserID == user.Id)
+
+            var result = _context.Computers.Where(o => o.UserID == user.Id)
                             .Include(o => o.Case)
                             .Include(o => o.CDROM)
                             .Include(o => o.CPU)
@@ -44,9 +44,9 @@ namespace DIYComputer.WebFrontend.Controllers.UserDo
                             .Include(o => o.Power)
                             .Include(o => o.ROM)
                             .Include(o => o.SSD)
-                            .ToListAsync();
-        
-          
+                            .ToList();
+
+
             return View(result);
         }
 
@@ -136,7 +136,7 @@ namespace DIYComputer.WebFrontend.Controllers.UserDo
 
             if (ModelState.IsValid)
             {
-               
+
                 _context.Add(computer);
                 await _context.SaveChangesAsync();
 
