@@ -6,7 +6,7 @@
   "dependencies": {
     "bootstrap": "4.0.0",
     "vue": "2.6.10",
-    "jquery": "3.3.1",
+    "jquery": "3.5.0",
     "bootstrap-vue": "2.0.0-rc.15",
     "jquery-validation": "1.19.0",
     "jquery-validation-unobtrusive": "3.2.11",
